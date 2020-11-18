@@ -106,7 +106,7 @@
         top: 2rem;
         right: 2.5rem;
         // background-color: radial-gradient(orange, $main-orange);
-        background-color: rgba(#000, 1);
+        background-color: rgba(0, 0, 0, 0.6);
         z-index: 1000;
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
@@ -269,7 +269,6 @@
 .header-second {
   position: relative;
   background-image: linear-gradient(to right, $main-black-gradient-dark, $main-black-gradient-light);
-  top: 0;
   left: 0;
 }
 

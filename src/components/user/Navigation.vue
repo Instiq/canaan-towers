@@ -79,7 +79,7 @@
         top: 6.5rem;
         right: 6.5rem;
         // background-color: radial-gradient(orange, $main-orange);
-        background-color: rgba(#000, 1);
+        background-color: rgba(0, 0, 0, 0.6);
         z-index: 1000;
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 

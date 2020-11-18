@@ -17,7 +17,7 @@ const Api = (props) => {
         }
 
         try {
-        const response = await fetch('http://3.138.78.254:88/account/register', requestOptions);
+        const response = await fetch(`http://3.138.78.254:88/account/register`, requestOptions);
         const maindata = await response.json();
         console.log(maindata)
         localStorage.setItem('userdata', JSON.stringify(maindata));

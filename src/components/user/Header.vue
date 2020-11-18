@@ -162,7 +162,7 @@ export default {
         top: 6.5rem;
         right: 6.5rem;
         // background-color: radial-gradient(orange, $main-orange);
-        background-color: rgba(#000, 1);
+        background-color: rgba(0, 0, 0, 0.6);
         z-index: 1000;
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
@@ -185,10 +185,11 @@ export default {
         top: 0;
         left: 0;
         z-index: 1500;
-
         opacity: 0;
         width: 0;
         transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        background-color: rgba(0, 0, 0, 0.5);
+
     }
 
     &__list {
