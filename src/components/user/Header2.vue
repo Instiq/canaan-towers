@@ -1,16 +1,16 @@
 /* eslint-disable no-undef */
 <template>
   <div class="header-first wrapper">
-    <!-- <b-navbar toggleable="lg" type="" class="navbar-first">
+    <b-navbar toggleable="lg" type="" class="navbar-first">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <img
         src="../../assets/images/Logo-1.png"
         alt=""
-        class="navbar-first__logo"
+        class="navbar-first__logo navbar-first__logo--1"
       />
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto navbar--1 flex">
           <b-nav-item href="#" class="navbar-first__item" to="/">Home</b-nav-item>
           <b-nav-item href="#" class="navbar-first__item" to="/about">About Us</b-nav-item>
           <b-nav-item href="#" class="navbar-first__item" to="/contact">Contact Us</b-nav-item>
@@ -22,7 +22,7 @@
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
-    </b-navbar> -->
+    </b-navbar>
 
     <div class="navigation">
       <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
@@ -305,6 +305,7 @@ export default {
     }
 }
 
+
 .header-first {
   background-image: url("../../assets/images/CanaanArc.png");
   min-height: 90rem;
@@ -317,8 +318,20 @@ export default {
   background-position-x: right;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .navbar-first {
-  padding: 0 10rem;
+  padding: 4rem 10rem 0;
+  right: 0;
+  position: absolute;
+
+  .navbar--1 {
+    width: 40vw;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
 }
 
 .header-first--secondary-text {
@@ -330,6 +343,10 @@ export default {
   position: absolute;
   left: 7rem;
   top: 3rem;
+
+  &--1 {
+    display: none
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -425,7 +442,20 @@ export default {
   }
 }
 
+
+@media screen and (min-width: 900px) {
+    .navigation {
+      display: none;
+    }
+}
+
+
 @media screen and (max-width: 767px) {
+
+  .navigation {
+      display: inline;
+    }
+
   .header-first {
     min-height: 40rem;
     background-size: 82vw;

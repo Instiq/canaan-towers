@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 <template>
   <div class="header-first wrapper">
-    <!-- <b-navbar toggleable="lg" type="" class="navbar-first">
+    <b-navbar toggleable="lg" type="" class="navbar-first">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <img
         src="../../assets/images/Logo-1.png"
         alt=""
-        class="navbar-first__logo"
+        class="navbar-first__logo navbar-first__logo--1"
       />
 
       <b-collapse id="nav-collapse" is-nav>
@@ -308,8 +308,13 @@ export default {
   background-position: absolute;
 }
 
+// .wrapper {
+//   position: relative;
+// }
+
 .navbar-first {
-  padding: 0 10rem;
+  padding: 0 10rem 0 0;
+  transform: translate(-28%, 100%);
 }
 
 .header-first--secondary-text {
@@ -321,6 +326,10 @@ export default {
   position: absolute;
   left: 7rem;
   top: 3rem;
+
+  &--1 {
+    display: none
+  }
 }
 
 .navbar-first__item {
@@ -412,6 +421,13 @@ export default {
     padding-right: 6rem;
   }
 }
+
+@media screen and (min-width: 900px) {
+  .navigation {
+    display: none;
+  }
+}
+
 
 @media screen and (max-width: 767px) {
   .navbar-first__logo {

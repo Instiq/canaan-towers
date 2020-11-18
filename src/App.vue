@@ -16,4 +16,19 @@
   color: #2c3e50;
 }
 
+
+.flex--1 {
+    display: flex;
+}
+
+.flex--2 {
+    display: flex;
+    align-items: center;
+}
+
+.flex--3 {
+    display: flex;
+    flex-direction: column;
+}
+
 </style>

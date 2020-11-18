@@ -1,26 +1,5 @@
 <template>
   <div class="secondary-header-sub">
-    <b-container class="text-left">
-      <!-- <b-col class="text-left">
-        <div>
-          <b-form>
-            <b-form-group id="input-group-3" label-for="input-3" class='services'>
-              <b-form-select
-                id="input-3"
-                :options="serviceData.services"
-                v-model="serviceData.service"
-                required
-                @change="changePicture"
-              ></b-form-select>
-            </b-form-group>
-          </b-form>
-
-        </div>
-      </b-col> -->
-      <div class="search-quote text-left">
-        <span>building construction</span>
-      </div>
-    </b-container>
   </div>
 </template>
 
@@ -44,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .secondary-header-sub {
   background-color: $main-grey-light;
-  height: 7rem;
+  height: 1rem;
   padding-top: 1rem;
 }
 

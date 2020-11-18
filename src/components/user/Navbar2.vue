@@ -1,6 +1,6 @@
 <template>
   <div class="header-second">
-    <!-- <b-navbar toggleable="lg" type="" class="navbar-second">
+    <b-navbar toggleable="lg" type="" class="navbar-second">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-navbar-brand href="#" class="navbar-brand" style=""
         ><img
@@ -21,7 +21,7 @@
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
-    </b-navbar> -->
+    </b-navbar>
     <div class="navigation">
       <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
       <label for="navi-toggle" class="navigation__button">
@@ -71,6 +71,17 @@
         @media only screen and (min-width: 112.5em) { @content };    //1800
     }
 }
+
+ .navbar-brand {
+      background-color: #fff;
+      padding: 2rem 4rem;
+
+      img {
+        width: 12rem;
+        height: auto;
+        padding: 0 1rem 0 0;
+      }
+    }
 
 .navigation {
     &__checkbox {
@@ -282,8 +293,8 @@
 }
 
 .navbar-second__logo {
-  width: 7rem;
-  // background-color: #fff;
+  width: 10rem;
+  background-color: #fff;
   padding: 2rem 0rem;
   margin: 0;
 }
@@ -320,4 +331,33 @@
   font-weight: 700;
   text-transform: capitalize;
 }
+
+@media screen and (min-width: 900px) {
+    .navigation {
+      display: none;
+    }
+
+    .logo {
+      display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .navigation {
+      display: inline;
+    }
+
+    .logo {
+      display: inline;
+    }
+
+    .navbar-brand, .navbar-second__logo {
+      display: none;
+    }
+    .navbar-second {
+        background-color: #cfcece;
+    }
+}
+
+
 </style>

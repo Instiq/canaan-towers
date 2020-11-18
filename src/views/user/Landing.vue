@@ -8,6 +8,10 @@
 <script>
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
+import Api from '@/Auth/Api.js'
+
+
+const { getBuilding } = Api();
 
 export default {
   data () {
@@ -21,6 +25,16 @@ export default {
   components: {
     appHeader: Header,
     appWhatsapp: Whatsapp
+  },
+  mounted () {
+    getBuilding("building","slider")
+  },
+  methods: {
+    async getName(){
+      const res = await fetch('https://canaan-towers-api.herokuapp.com/building/slider');
+      const data = await res.json();
+      console.log(data)
+    }
   }
 }
 </script>

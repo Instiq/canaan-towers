@@ -19,6 +19,7 @@
                 v-model="form.name"
                 required
                 placeholder=""
+                class="input-font"
               ></b-form-input>
             </b-form-group>
 
@@ -34,6 +35,7 @@
                 type="email"
                 required
                 placeholder=""
+                class="input-font"
               ></b-form-input>
             </b-form-group>
 
@@ -48,6 +50,7 @@
                 v-model="form.number"
                 type="number"
                 required
+                class="input-font"
                 placeholder=""
               ></b-form-input>
             </b-form-group>
@@ -60,6 +63,7 @@
               <b-form-select
                 id="input-3"
                 v-model="form.residence"
+                class="input-font"
                 :options="residence"
                 required
               ></b-form-select>
@@ -67,13 +71,14 @@
 
             <b-form-group
               id="input-group-5"
-              label="Message:"
+              label="Message (Additional Information):"
               label-for="input-5"
               description=""
             >
               <b-form-textarea
                 id="textarea-rows"
                 v-model="form.message"
+                class="input-font"
                 placeholder=""
                 rows="8"
               ></b-form-textarea>
@@ -199,7 +204,6 @@ export default {
 .quote-card {
   margin: 0 auto;
 }
-
 .modal {
   &-main-text {
     font-size: 1.6rem;
@@ -342,4 +346,9 @@ export default {
       padding: 1rem 6rem;
     }
 }
+
+.input-font {
+  font-size: 14px;
+}
+
 </style>

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Admin from '../views/Admin'
+import Login from '../components/Adminz/Login'
 
 Vue.use(VueRouter)
 
@@ -83,6 +85,19 @@ const routes = [
     path: '/admin/manage-services-carousel',
     name: 'ManageServicesCarousel',
     component: () => import('../views/admin/ManageServicesCarousel.vue')
+  },
+  ,
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    children: [
+      {
+        path: '',
+        name: 'Login',
+        component: Login,
+      },
+    ]
   }
 ]
 
