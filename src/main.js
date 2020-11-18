@@ -12,11 +12,10 @@ import VueGoodTablePlugin from 'vue-good-table'
 import 'vue-good-table/dist/vue-good-table.css'
 import VuexRouterSync from 'vuex-router-sync'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faLinkedin, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(fas, fab)
+library.add(faFacebook, faLinkedin, faTwitter, faYoutube)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 VuexRouterSync.sync(store, router)
 Vue.use(VueGoodTablePlugin)
