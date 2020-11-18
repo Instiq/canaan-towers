@@ -21,13 +21,12 @@
               <p>Privacy Policy</p>
             </b-col>
             <b-col class="icons" xs="6" md="4">
-              <div id="app">
-                <font-awesome-icon :icon="['fab', 'fa-facebook-square']" />
+              <div class="font footer__social-icon">
+                <font-awesome-icon :icon="['fab', 'facebook']" class="font"/>
+                <font-awesome-icon :icon="['fab', 'linkedin']" class="font"/>
+                <font-awesome-icon :icon="['fab', 'twitter']" class="font"/>
+                <font-awesome-icon :icon="['fab', 'youtube']" class="font"/>
               </div>
-              <img class="footer__social-icon" src="../../assets/images/facebook.svg"/>
-              <img class="footer__social-icon" src="../../assets/images/youtube.svg"/>
-              <img class="footer__social-icon" src="../../assets/images/linkedin.svg"/>
-              <img class="footer__social-icon" src="../../assets/images/twitter.svg"/>
             </b-col>
           </b-row>
           <b-row class="text-center footer__copyright">
@@ -40,12 +39,23 @@
 </template>
 
 <style lang="scss">
+
 .footer {
   margin-top: 5rem;
   font-weight: 500;
   padding: 10rem 0 6rem 0rem;
   background-color: $main-black-gradient-dark;
   color: #fff;
+
+  .footer__social-icon {
+    display: flex;
+    justify-items: space-between;
+    width: 100%;
+    .font {
+      margin: 2rem;
+      font-size: 3.5rem;
+    }
+  }
 
   &-logo {
     width: 100%;
