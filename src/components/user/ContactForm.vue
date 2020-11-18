@@ -3,7 +3,7 @@
     <b-card class="text-left card">
       <h3 class="header">Send Us  A Message</h3>
       <b-row>
-        <b-col cols="12" md="6">
+        <b-col cols="12" md="6"> 
           <p class="mb-5 fill-info">
             Kindly fill in your details in the form below. Our agents will
             contact you
@@ -20,6 +20,7 @@
                 v-model="form.name"
                 required
                 placeholder=""
+                class="input-font"
               ></b-form-input>
             </b-form-group>
 
@@ -35,6 +36,7 @@
                 type="email"
                 required
                 placeholder=""
+                class="input-font"
               ></b-form-input>
             </b-form-group>
 
@@ -49,13 +51,14 @@
                 v-model="form.number"
                 type="number"
                 required
+                class="input-font"
                 placeholder=""
               ></b-form-input>
             </b-form-group>
 
             <b-form-group
               id="input-group-5"
-              label="Message:"
+              label="Message (Additional Information):"
               label-for="input-5"
               description=""
             >
@@ -63,6 +66,7 @@
                     id="textarea-rows"
                     v-model="form.message"
                     placeholder=""
+                    class="input-font"
                     rows="8"
                 ></b-form-textarea>
             </b-form-group>
@@ -253,4 +257,8 @@ export default {
     font-size: 1.1rem;
   }
 }
+
+ .input-font {
+    font-size: 14px;
+  }
 </style>
