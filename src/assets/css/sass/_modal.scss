@@ -1,0 +1,9 @@
+.modal-header,
+.modal-footer {
+    display: none !important;
+}
+
+.modal-body {
+    overflow: hidden !important;
+    padding: 0rem 8rem 2rem 8rem !important;
+}
