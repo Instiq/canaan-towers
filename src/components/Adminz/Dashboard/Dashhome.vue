@@ -5,7 +5,7 @@
             <Navbar/>
             <router-view/>
         </div>
-    </div>
+    </div> 
 </template>
 
 <script>
@@ -13,7 +13,7 @@
     import Sidebar from './Sidebar'
 
     export default {
-        name: 'Admin',
+        name: 'Dashboard',
         components: {
             Navbar,
             Sidebar
@@ -23,7 +23,8 @@
 
 <style lang="scss" scoped>
     .dash--2 {
-        margin-left: 15vw;
-        width: 100%;
+        margin: 0 0 0 15vw;
+        width: calc(100% - 15vw);
     }
+
 </style>

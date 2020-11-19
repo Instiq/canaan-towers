@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Admin from '../views/Admin'
 import Login from '../components/Adminz/Login'
+import Dashboard from '../components/Adminz/Dashboard/Dashhome'
+import Dashmain from '../components/Adminz/Dashboard/Dashmain'
 
 Vue.use(VueRouter)
 
@@ -97,6 +99,19 @@ const routes = [
         name: 'Login',
         component: Login,
       },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: Dashboard,
+        children: [
+          {
+            path: '',
+            name: 'Dashmain',
+            component: Dashmain,
+          }
+        ]
+
+      }
     ]
   }
 ]

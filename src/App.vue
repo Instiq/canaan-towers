@@ -13,7 +13,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+}
+
+*{
+  margin: 0;
 }
 
 
@@ -29,6 +32,11 @@
 .flex--3 {
     display: flex;
     flex-direction: column;
+}
+
+button, button:focus {
+  outline: none;
+  border: none;
 }
 
 </style>
