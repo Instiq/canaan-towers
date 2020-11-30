@@ -106,7 +106,7 @@
             .chart {
                 flex: 1 1 300px;
                 // width: 45%;
-                min-width: 101px;
+                min-width: 100px;
             }
         }
     }
