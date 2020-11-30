@@ -39,7 +39,7 @@
                     body: JSON.stringify(data)
                 }
                 try {
-                    const request = await fetch('http://localhost:8080/admin/login', requestOptions);
+                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions);
                     const response = await request.json();
                     let user = JSON.stringify(response.data)
                     let timeOut = new Date().getTime() + 3600000
@@ -50,8 +50,8 @@
                         console.log('e de alright')
                         this.$router.push('/admin/dashboard')
                     }
-                } catch (err) {
-                    console.log(err);
+                } catch (error) {
+                    console.log(error);
                 }
             }
         }

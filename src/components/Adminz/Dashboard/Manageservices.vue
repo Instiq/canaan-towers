@@ -318,7 +318,7 @@
                         }
                     }
 
-                    .showdropdown {
+                    .showdropdown { 
                         opacity: 0;
                         visibility: hidden;
                         transform: translateY(-1rem);
