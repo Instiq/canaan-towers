@@ -50,8 +50,8 @@
                         console.log('e de alright')
                         this.$router.push('/admin/dashboard')
                     }
-                } catch (error) {
-                    console.log(error);
+                } catch (errors) {
+                    console.log(errors);
                 }
             }
         }
