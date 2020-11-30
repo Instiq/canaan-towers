@@ -2,10 +2,6 @@
     <div>
         <app-header :headerMain="headerMain"></app-header>
         <app-whatsapp></app-whatsapp>
-        <div v-for="item in items" :key="item.id">
-          <h1>hello {{ item.image }}</h1>
-          <img :src='item.image' style="width: 500px; height: 1p"/>
-        </div>
     </div>
 </template>
 
