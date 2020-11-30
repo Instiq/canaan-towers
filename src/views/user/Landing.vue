@@ -9,7 +9,7 @@
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
 import Api from '@/store/Auth/Api'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 
 
