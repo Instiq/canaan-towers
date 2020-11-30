@@ -92,7 +92,7 @@
                     text-align: left;
                     font: normal normal 600 30px/30px Poppins;
                     letter-spacing: 0px;
-                    color: #CC5722;
+                    color: #d89474;
                 }
             }
         }
@@ -106,7 +106,7 @@
             .chart {
                 flex: 1 1 300px;
                 // width: 45%;
-                min-width: 100px;
+                min-width: 101px;
             }
         }
     }
