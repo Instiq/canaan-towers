@@ -6,7 +6,7 @@
             <p>Login to continue</p>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email">
+                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email"> 
             </div>
             <div class='input-label'>
                 <label for="newTwoot"></label>
@@ -50,9 +50,8 @@
                         console.log('e de alright')
                         this.$router.push('/admin/dashboard')
                     }
-                } catch (err) {
-                    console.log(err);
-                    console.log(err);
+                } catch (errrs) {
+                    console.log(errrs);
                 }
             }
         }
