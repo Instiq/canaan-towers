@@ -99,7 +99,7 @@ export default {
         name: '',
         // lastname: '',
         number: '',
-        message: ''
+        message: '' 
         // food: null,
       },
       residence: [
@@ -120,7 +120,7 @@ export default {
     async handleSubmit () {
       const response = await axios.post('https://canaan-towers-api.herokuapp.com/quotes', {
         email: this.form.email,
-        name: this.form.name,
+        name: this.form.name, 
         // lastname: this.lastname,
         number: this.form.number,
         message: this.form.message

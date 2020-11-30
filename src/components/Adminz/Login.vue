@@ -1,33 +1,64 @@
 <template>
     <div class="dash--login flex--3">
         
-        <div class='login-form'>
-            <h1>Welcome to Canaan Towers</h1>
+        <form class='login-form' @submit.prevent="handleSubmit">
+            <h1>Welcome to Canaan Towers</h1> 
             <p>Login to continue</p>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Email Address">
+                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email">
             </div>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Password">
+                <input id="newTwoot" placeholder="Password" type='password' v-model="form.password">
             </div>
-            <router-link to='/admin/dashboard'>
-                <button>LOGIN</button>
-            </router-link>
+            <button type="submit">LOGIN</button>
             <img src="../../assets/images/loginfloat.svg" class="loginfloat"/>
             <p class="forgot">Reset password?</p>
-        </div>
+        </form>
     </div>
 </template>
 
 <script>
     export default {
-        
+        data () {
+            return {
+                form: {
+                    email: '',
+                    password: '' 
+                },
+            }
+        },
+        methods: {  
+            async handleSubmit () {
+                let data = {...this.form}
+                this.form = {};
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }
+                try {
+                    const request = await fetch('http://localhost:8080/admin/login', requestOptions);
+                    const response = await request.json();
+                    let user = JSON.stringify(response.data)
+                    let timeOut = new Date().getTime() + 3600000
+                    localStorage.setItem('admin', user)
+                    localStorage.setItem('timeOut', timeOut)
+                    console.log('admin', response);
+                    if(response.status === 'success') {
+                        console.log('e de alright')
+                        this.$router.push('/admin/dashboard')
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        }
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .dash--login {
         text-align: start;
         width: 100%;
@@ -36,12 +67,12 @@
         height: 100vh;
 
         .login-form {
-            width: 50%;
-            max-width: 650px;
+            width: 44%;
+            max-width: 550px;
             margin-left: 4rem;
             z-index: 2;
             background-color: #FFFFFF;
-            padding: 4rem 10rem;
+            padding: 5rem 6rem 2rem;
             border: 2px solid #E36F1A;
             border-radius: 10px;
             position: relative;
@@ -91,8 +122,8 @@
 
             .loginfloat {
                 position: absolute;
-                top: -10rem;
-                right: -8rem;
+                top: -12rem;
+                right: -10rem;
             }
 
         }

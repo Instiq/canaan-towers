@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+import * as actions from './Auth/Api'
+
 export default new Vuex.Store({
   state: {
     serviceData: {
@@ -34,25 +36,32 @@ export default new Vuex.Store({
       ],
       slider: ['road-work-slide-1', 'road-work-slide-2', 'road-work-slide-3', 'road-work-slide-4', 'road-work-slide-5']
     },
-    partners: ['partner-1', 'partner-2', 'partner-3', 'partner-4', 'partner-5']
+    partners: ['partner-1', 'partner-2', 'partner-3', 'partner-4', 'partner-5'],
+    title: 'hello boy',
+    items:[]
   },
   mutations: {
     changePicture (state) {
       const ind = state.serviceData.services.indexOf(state.serviceData.service)
       state.serviceData.mainPicture = state.serviceData.mainPictures[ind]
       state.serviceData.slider = state.serviceData.sliders[ind]
+    },
+    SET_DATA: (state, items) => {
+      state.items = items
     }
-  },
-  actions: {
-  },
+  }, 
+  actions,
   modules: {
   },
-  getters: {
+  getters: { 
     serviceData (state) {
       return state.serviceData
     },
     partners (state) {
       return state.partners
+    },
+    title () {
+      return state.title 
     }
   }
 })

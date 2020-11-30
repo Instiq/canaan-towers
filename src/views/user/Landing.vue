@@ -2,39 +2,47 @@
     <div>
         <app-header :headerMain="headerMain"></app-header>
         <app-whatsapp></app-whatsapp>
+        <div v-for="item in items" :key="item.id">
+          <h1>hello {{ item.image }}</h1>
+          <img :src='item.image' style="width: 500px; height: 1p"/>
+        </div>
     </div>
 </template>
 
 <script>
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
-import Api from '@/Auth/Api.js'
+import Api from '@/store/Auth/Api'
+import { mapState } from 'vuex'
 
 
-const { getBuilding } = Api();
 
 export default {
-  data () {
+  data () { 
     return {
       headerMain: {
         leftHeader: 'The Best Place For All You Need...',
         leftText: 'Simplifying the complexities of human desires is our specialty. We are for you.'
-      }
+      },
     }
   },
   components: {
     appHeader: Header,
     appWhatsapp: Whatsapp
   },
-  mounted () {
-    getBuilding("building","slider")
+  beforeCreate () {
+    this.$store.dispatch('makeRequest')
   },
+  mounted () {
+  },
+  computed:  {
+    ...mapState ([
+      'items'
+    ])
+    // Add other computed properties here
+  },  
   methods: {
-    async getName(){
-      const res = await fetch('https://canaan-towers-api.herokuapp.com/building/slider');
-      const data = await res.json();
-      console.log(data)
-    }
+    
   }
 }
 </script>

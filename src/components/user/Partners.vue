@@ -30,7 +30,7 @@ export default {
     getImgUrl (image) {
       var images = require.context('../../assets/images/', false, /\.png$/)
       return images('./' + image + '.png')
-    }
+    } 
   },
   mounted () {
     // eslint-disable-next-line no-undef

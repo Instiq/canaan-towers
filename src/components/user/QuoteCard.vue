@@ -8,7 +8,7 @@
             Kindly fill in your details in the form below. Our agents will
             contact you
           </p>
-          <b-form @submit.prevent="onSubmit" v-if="show">
+          <b-form @submit.prevent="upload" v-if="show">
             <b-form-group
               id="input-group-2"
               label="Name:"
@@ -132,6 +132,7 @@
                 placeholder=""
                 class="browse"
                 drop-placeholder="Drop file here..."
+                @change="fileSelected"
               ></b-form-file>
               </div>
               </b-col>
@@ -181,12 +182,12 @@ export default {
         'Kwara',
         'Jigawa'
       ],
-      show: true
+      show: true,
+      image: null
     }
   },
   methods: {
     async onSubmit () {
-      // alert(JSON.stringify(this.form))
       const response = await axios.post('https://canaan-towers-api.herokuapp.com/quotes', {
         email: this.form.email,
         name: this.form.name,
@@ -195,7 +196,25 @@ export default {
       })
       delete response.data
       this.form = {}
+    },
+    fileSelected(event){
+      this.image = event.target.files[0]
+    },
+    async upload() {
+      const forss = new FormData()
+      let name = this.form.name
+      let description = 'asdf'
+      console.log(1, forss, title, description, this.image.name)
+      forss.append('image', this.image, this.image.name)
+      forss.append('title', title)
+      forss.append('description', description)
+      console.log('boyoboy')
+      let a = await axios.post('https://canaan-towers-api.herokuapp.com/building/slider', forss)
+      console.log(a.data)
+      console.log('done')
+
     }
+
   }
 }
 </script>

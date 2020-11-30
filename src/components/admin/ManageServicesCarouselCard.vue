@@ -22,3 +22,4 @@ export default {
   box-shadow: 0 0.5rem 1rem rgba(#000, 0.2);
 }
 </style>
+ 
