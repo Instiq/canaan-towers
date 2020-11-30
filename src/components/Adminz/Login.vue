@@ -6,7 +6,7 @@
             <p>Login to continue</p>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email">
+                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email"> 
             </div>
             <div class='input-label'>
                 <label for="newTwoot"></label>
