@@ -126,7 +126,7 @@
                     padding-left: 2rem;
                 }
             }
-        
+
             button {
                 width: 18%;
                 margin-top: 2rem;
@@ -135,11 +135,10 @@
                 background: #E36F1A 0% 0% no-repeat padding-box;
                 box-shadow: 0px 4px 12px #F06F3866;
                 color: white;
-            }   
+            }
 
             .upload-container {
                 align-items: center;
-                
 
                 .image {
                     border: 2px dashed grey;
@@ -159,7 +158,6 @@
             }
 
         }
-            
-            
+
     }
 </style>

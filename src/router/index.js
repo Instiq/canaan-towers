@@ -10,7 +10,7 @@ import Updateservices from '../components/Adminz/Dashboard/Updateservices'
 import Manageservices from '../components/Adminz/Dashboard/Manageservices'
 import AdminManagement from '../components/Adminz/Dashboard/AdminManagement'
 
-Vue.use(VueRouter) 
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -74,26 +74,6 @@ const routes = [
     component: () => import('../views/user/Checkout.vue')
   },
   {
-    path: '/admin/login',
-    name: 'AdminLogin',
-    component: () => import('../views/admin/LandingPage.vue')
-  },
-  {
-    path: '/admin/super-dashboard',
-    name: 'AdminDashboard',
-    component: () => import('../views/admin/SuperDashboard.vue')
-  },
-  {
-    path: '/admin/manage-services',
-    name: 'ManageServices',
-    component: () => import('../views/admin/ManageServices.vue')
-  },
-  {
-    path: '/admin/manage-services-carousel',
-    name: 'ManageServicesCarousel',
-    component: () => import('../views/admin/ManageServicesCarousel.vue')
-  },
-  {
     path: '/admin',
     name: '',
     component: Admin,
@@ -101,30 +81,30 @@ const routes = [
       {
         path: '',
         name: '',
-        component: Login,
+        component: Login
       },
       {
         path: 'dashboard',
         name: '',
         component: Dashboard,
-        
+
         beforeEnter: (to, from, next) => {
           // ...
-          let admin= JSON.parse(localStorage.getItem('admin'))
-          let timeOut= localStorage.getItem('timeOut')
-          if((admin && admin.token) && timeOut) next();
-          else next('/admin');
+          const admin = JSON.parse(localStorage.getItem('admin'))
+          const timeOut = localStorage.getItem('timeOut')
+          if ((admin && admin.token) && timeOut) next()
+          else next('/admin')
         },
         children: [
           {
             path: '',
             name: '',
-            component: Dashmain,
+            component: Dashmain
           },
           {
             path: 'createadmin',
             name: 'CreateAdmin',
-            component: CreateAdmin,
+            component: CreateAdmin
           },
           {
             path: 'quotes',
@@ -161,5 +141,5 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
- 
+
 export default router

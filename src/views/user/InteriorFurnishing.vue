@@ -33,8 +33,8 @@ export default {
       },
       mainCarousel: {
         picture: [
-          'interior-furnishing-main-carousel-1',
-          'interior-furnishing-main-carousel-2'
+          'interior-furnishing-main-carousel-1.jpg',
+          'interior-furnishing-main-carousel-2.jpg'
         ]
       },
       relatedProjects: {

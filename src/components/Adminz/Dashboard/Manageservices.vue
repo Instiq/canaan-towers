@@ -11,9 +11,9 @@
                             <li @click="service = 'building'; services = 'Building Construction'; fetchService()">Building Construction</li>
                             <li @click="service = 'power'; services = 'Alternative Power'; fetchService()">Alternative Power</li>
                             <li @click="service = 'furnish'; services = 'Interior Furnishing'; fetchService()">Interior Furnishing</li>
-                            <li @click="service = 'automobile'; services = 'Automobile Sales'; fetchService()">Automobile Sales</li>                           
-                            <li @click="service = 'road'; services = 'Road Work'; fetchService()">Road Work</li>                           
-                            <li @click="service = 'roof'; services = 'Roofing Sheets'; fetchService()">Roofing Sheets</li>                           
+                            <li @click="service = 'automobile'; services = 'Automobile Sales'; fetchService()">Automobile Sales</li>
+                            <li @click="service = 'road'; services = 'Road Work'; fetchService()">Road Work</li>
+                            <li @click="service = 'roof'; services = 'Roofing Sheets'; fetchService()">Roofing Sheets</li>
                         </ul>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                 </div>
             </section>
         </main>
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -231,8 +231,10 @@
                 toggler() {
                     this.toggle = !this.toggle
                 }
-            },
+            }
     }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -274,8 +276,6 @@
                     margin: .5rem 0 0 1rem;
                     font-size: 14px;
 
-
-
                     h5 {
                         color: #414042;
                         display: block;
@@ -303,7 +303,6 @@
                         transition: all .2s ease-in;
                         border: 1px solid #5c5c5c;
 
-                        
                         li {
                             color: #424041;
                             background: white;
@@ -318,7 +317,7 @@
                         }
                     }
 
-                    .showdropdown { 
+                    .showdropdown {
                         opacity: 0;
                         visibility: hidden;
                         transform: translateY(-1rem);
@@ -373,7 +372,7 @@
                     }
                 }
             }
-            
+
             %button {
                 text-align: center;
                 font: normal normal 600 16px/30px Poppins;
@@ -510,7 +509,6 @@
                     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
                     grid-gap: 2rem;
 
-
                     .carousel-image {
                         width: 100%;
 
@@ -521,7 +519,7 @@
                     }
                 }
             }
-            
+
             .sub-section--2 {
                 justify-content: space-between;
 
@@ -548,7 +546,6 @@
                     padding: 0 1rem;
                 }
 
-                
                 .input--12 {
                     gap: 2rem;
 
@@ -582,9 +579,8 @@
                     }
                 }
 
-                
                 .upload-container {
-                    @extend %upload; 
+                    @extend %upload;
 
                     .image {
                         padding: 0;
@@ -599,7 +595,6 @@
 
                 .edit {
                     @extend %edit;
-                    
 
                     &-container {
                         @extend %container;
@@ -692,13 +687,11 @@
                 }
             }
 
-
         }
 
         .select {
             cursor: pointer
         }
-
 
     }
 

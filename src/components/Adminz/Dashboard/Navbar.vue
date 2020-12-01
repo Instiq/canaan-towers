@@ -9,14 +9,14 @@
             <font-awesome-icon :icon="['fas', 'chevron-down']" class="font-2"/>
         </div>
     </div>
-</template> 
+</template>
 
 <script>
-    export default {
-        name: 'Navbar',
-        props: ['heading']
+export default {
+  name: 'Navbar',
+  props: ['heading']
 
-    }
+}
 </script>
 
 <style lang="scss">
@@ -36,11 +36,11 @@
         }
 
         p {
-            margin: 0; 
-        } 
+            margin: 0;
+        }
 
         .input-search {
-        
+
             p {
                 font: normal normal medium 18px/27px Poppins;
                 letter-spacing: 0px;
@@ -52,7 +52,7 @@
                 border-radius: 50%;
                 overflow: hidden;
                 width: 45px;
-                height: 45px; 
+                height: 45px;
             }
 
             img {

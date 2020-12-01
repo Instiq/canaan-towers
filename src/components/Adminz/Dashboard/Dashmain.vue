@@ -22,7 +22,7 @@
                 <h1>Total Quotes</h1>
                 <p>16</p>
             </div>
-            <div class="card flex--3"> 
+            <div class="card flex--3">
                 <h1>Resolved Quotes</h1>
                 <p>09</p>
             </div>
@@ -43,15 +43,15 @@
 </template>
 
 <script>
-    import Navbar from '@/components/Adminz/Dashboard/Navbar'
-    import Chart from '@/components/Adminz/Dashboard/Chart/Chart'
-    export default {
-        name: "Dashmain",
-        components: {
-            Navbar,
-            Chart
-        }
-    }
+import Navbar from '@/components/Adminz/Dashboard/Navbar'
+import Chart from '@/components/Adminz/Dashboard/Chart/Chart'
+export default {
+  name: 'Dashmain',
+  components: {
+    Navbar,
+    Chart
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +59,6 @@
         text-align: start;
         width: 100%;
         color: #ffa07a;
-        
 
         .card-container {
             display: grid;
@@ -68,7 +67,6 @@
             margin-bottom: 4rem;
             border-radius: 50%;
             flex-wrap: wrap;
-
 
             .card {
                 padding: 2rem;
@@ -102,7 +100,7 @@
             gap: 2rem;
             flex-wrap: wrap;
             margin: 4rem 0;
-            
+
             .chart {
                 flex: 1 1 300px;
                 // width: 45%;

@@ -87,22 +87,22 @@
                 </div>
             </section>
         </main>
-    </div> 
+    </div>
 </template>
 
 <script>
-    import Navbar from './Navbar'
-    export default {
-        data() {
-            return {
-               show: 'project',
-                items: [] 
-            }
-        },
-        components: {
-            Navbar
-        }
+import Navbar from './Navbar'
+export default {
+  data () {
+    return {
+      show: 'project',
+      items: []
     }
+  },
+  components: {
+    Navbar
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -170,7 +170,7 @@
                     margin-bottom: 2rem;
 
                     &--1 {
-                        
+
                         button {
                             background: #E36F1A 0% 0% no-repeat padding-box;
                             border-radius: 5px;
@@ -192,7 +192,6 @@
                     }
                 }
 
-
                 p {
                     text-decoration: underline;
                     font: normal normal normal 14px/21px Poppins;
@@ -201,7 +200,7 @@
                     cursor: pointer
                 }
             }
-            
+
             %button {
                 text-align: center;
                 font: normal normal 600 16px/30px Poppins;
@@ -257,7 +256,6 @@
                     padding: 0 1rem;
                 }
 
-                
                 .input--12 {
                     gap: 2rem;
 
@@ -289,7 +287,6 @@
                     }
                 }
 
-                
                 .upload-container {
                     @extend %upload;
                 }
@@ -334,13 +331,11 @@
                 }
             }
 
-
         }
 
         .select {
             cursor: pointer
         }
-
 
     }
 

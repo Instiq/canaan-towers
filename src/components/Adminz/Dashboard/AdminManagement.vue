@@ -70,6 +70,16 @@
             }  
         }
     }
+    try {
+      const request = await fetch('http://localhost:8080/admins', { headers })
+      const response = await request.json()
+      this.admins = response
+      this.loading = false
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +87,7 @@
         text-align: left;
         width: 100%;
 
-        .section--1 { 
+        .section--1 {
             background: #FFFFFF 0% 0% no-repeat padding-box;
             box-shadow: 0px 3px 6px #00000029;
             padding: 4rem 7rem;
@@ -117,7 +127,7 @@
                     font-size: 13px
                 }
             }
-            
+
             table {
                 white-space: nowrap;
                 font-size: 14px;
@@ -153,7 +163,6 @@
             // }
 
         }
-            
-            
+
     }
 </style>
