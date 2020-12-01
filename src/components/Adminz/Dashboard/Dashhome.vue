@@ -4,47 +4,47 @@
         <div class="dash--2">
             <router-view/>
         </div>
-    </div> 
+    </div>
 </template>
 
 <script>
-    import Sidebar from './Sidebar'
+import Sidebar from './Sidebar'
 
-    export default {
-        name: 'Dashboard',
-        components: {
-            Sidebar
-        },
-        methods: {
-            reload (){
-                console.log('qwert')
-                this.$router.push('/admin')
-            }
-        },
-        mounted () {
-            console.log('water')
-            let checkExpiration = () => { 
-                var values = localStorage.getItem('timeOut');
-                console.log('what', values)
-                if (values < new Date().getTime()) {
-                    localStorage.removeItem("timeOut")
-                    localStorage.removeItem("admin");
-                    this.$router.push('/admin')
-                }
-            }
-            checkExpiration();
-            let intervalCheck = () => {
-                var myinterval = 15*60*1000; // 15 mins interval
-                setInterval( 
-                    function(){ 
-                        checkExpiration(); 
-                    }, myinterval
-                );
-            };
-            intervalCheck();
-        },
+export default {
+  name: 'Dashboard',
+  components: {
+    Sidebar
+  },
+  methods: {
+    reload () {
+      console.log('qwert')
+      this.$router.push('/admin')
     }
-    console.log('Dashhome')
+  },
+  mounted () {
+    console.log('water')
+    const checkExpiration = () => {
+      var values = localStorage.getItem('timeOut')
+      console.log('what', values)
+      if (values < new Date().getTime()) {
+        localStorage.removeItem('timeOut')
+        localStorage.removeItem('admin')
+        this.$router.push('/admin')
+      }
+    }
+    checkExpiration()
+    const intervalCheck = () => {
+      var myinterval = 15 * 60 * 1000 // 15 mins interval
+      setInterval(
+        function () {
+          checkExpiration()
+        }, myinterval
+      )
+    }
+    intervalCheck()
+  }
+}
+console.log('Dashhome')
 </script>
 
 <style lang="scss">
@@ -54,5 +54,5 @@
         text-align: left;
         width: calc(100% - 15vw);
     }
- 
+
 </style>

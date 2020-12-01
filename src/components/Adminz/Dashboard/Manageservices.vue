@@ -11,9 +11,9 @@
                             <li @click="service = 'building'; services = 'Building Construction'; fetchService()">Building Construction</li>
                             <li @click="service = 'power'; services = 'Alternative Power'; fetchService()">Alternative Power</li>
                             <li @click="service = 'furnish'; services = 'Interior Furnishing'; fetchService()">Interior Furnishing</li>
-                            <li @click="service = 'automobile'; services = 'Automobile Sales'; fetchService()">Automobile Sales</li>                           
-                            <li @click="service = 'road'; services = 'Road Work'; fetchService()">Road Work</li>                           
-                            <li @click="service = 'roof'; services = 'Roofing Sheets'; fetchService()">Roofing Sheets</li>                           
+                            <li @click="service = 'automobile'; services = 'Automobile Sales'; fetchService()">Automobile Sales</li>
+                            <li @click="service = 'road'; services = 'Road Work'; fetchService()">Road Work</li>
+                            <li @click="service = 'roof'; services = 'Roofing Sheets'; fetchService()">Roofing Sheets</li>
                         </ul>
                     </div>
                 </div>
@@ -123,116 +123,116 @@
                 </div>
             </section>
         </main>
-    </div> 
+    </div>
 </template>
 
 <script>
-    import Navbar from './Navbar'
-    import axios from 'axios'
+import Navbar from './Navbar'
+import axios from 'axios'
 
-    export default {
-        data() {
-            return {
-                show: 'carousel',
-                editCatalogue: false,
-                editProject: false,
-                items: [],
-                carousels: [],
-                singleCarousel: {},
-                catalogues: [],
-                singleCatalogue: {},
-                projects: [],
-                singleProject: {},
-                confirm: false,
-                serviceCategory: 'carousel',
-                service: 'building',
-                services: 'Building Construction',
-                toggle: true
-            }
-        },
-        components: {
-            Navbar
-        },
-        async created () {
-            try {
-                const request = await fetch('https://canaan-towers-api.herokuapp.com/building/carousel');
-                const response = await request.json();
-                console.log('building', response)
-                this.carousels = response;
-            } catch (err) {
-                console.log(err);
-            }  
-        },
-        methods: {
-            selectedCarousel(carousel) {
-                this.singleCarousel = carousel;
-            },
-            selectCatalogue(catalogue) {
-                this.singleCatalogue = catalogue;
-            },
-            selectProject(project) {
-                this.singleProject = project;
-                console.log('why',this.singleProject)
-            },
-            
-            async deleteCarousel() {
-                let id = this.singleCarousel._id;
-                let admin= JSON.parse(localStorage.getItem('admin'))
-                let Authorized = admin && admin.token
-                try {
-                    console.log(id, Authorized, '1234')
-                    const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
-                        headers: {
-                            'Accept': 'application/json',
-                            'Authorization': `Bearer ${Authorized}`,
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    });
-                    console.log('request', request.data)
-                } catch (err) {
-                    console.log(err);
-                }
-            },
-            async fetchService() {
-                console.log(this.service)
-                console.log(this.serviceCategory, 'carousel')
-                if (this.serviceCategory === 'carousel') {
-                    try {
-                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
-                    const response = await request.json();
-                    console.log('local trial', response.carousel)
-                    this.carousels = response;
-                    } catch (err) {
-                        console.log(err);
-                    }  
-                }
-                if (this.serviceCategory === 'catalogue') {
-                    try {
-                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
-                    const response = await request.json();
-                    console.log('building', response)
-                    this.catalogues = response;
-                    } catch (err) {
-                        console.log(err);
-                    }  
-                }
-                if (this.serviceCategory === 'slider') {
-                    try {
-                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
-                    const response = await request.json();
-                    console.log('building', response)
-                    this.projects = response;
-                    console.log('projectssssss', this.projects)
-                    } catch (err) {
-                        console.log(err);
-                    }  
-                }
-                },
-                toggler() {
-                    this.toggle = !this.toggle
-                }
-            },
+export default {
+  data () {
+    return {
+      show: 'carousel',
+      editCatalogue: false,
+      editProject: false,
+      items: [],
+      carousels: [],
+      singleCarousel: {},
+      catalogues: [],
+      singleCatalogue: {},
+      projects: [],
+      singleProject: {},
+      confirm: false,
+      serviceCategory: 'carousel',
+      service: 'building',
+      services: 'Building Construction',
+      toggle: true
     }
+  },
+  components: {
+    Navbar
+  },
+  async created () {
+    try {
+      const request = await fetch('https://canaan-towers-api.herokuapp.com/building/carousel')
+      const response = await request.json()
+      console.log('building', response)
+      this.carousels = response
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  methods: {
+    selectedCarousel (carousel) {
+      this.singleCarousel = carousel
+    },
+    selectCatalogue (catalogue) {
+      this.singleCatalogue = catalogue
+    },
+    selectProject (project) {
+      this.singleProject = project
+      console.log('why', this.singleProject)
+    },
+
+    async deleteCarousel () {
+      const id = this.singleCarousel._id
+      const admin = JSON.parse(localStorage.getItem('admin'))
+      const Authorized = admin && admin.token
+      try {
+        console.log(id, Authorized, '1234')
+        const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${Authorized}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        console.log('request', request.data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async fetchService () {
+      console.log(this.service)
+      console.log(this.serviceCategory, 'carousel')
+      if (this.serviceCategory === 'carousel') {
+        try {
+          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
+          const response = await request.json()
+          console.log('local trial', response.carousel)
+          this.carousels = response
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      if (this.serviceCategory === 'catalogue') {
+        try {
+          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
+          const response = await request.json()
+          console.log('building', response)
+          this.catalogues = response
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      if (this.serviceCategory === 'slider') {
+        try {
+          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
+          const response = await request.json()
+          console.log('building', response)
+          this.projects = response
+          console.log('projectssssss', this.projects)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    },
+    toggler () {
+      this.toggle = !this.toggle
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -274,8 +274,6 @@
                     margin: .5rem 0 0 1rem;
                     font-size: 14px;
 
-
-
                     h5 {
                         color: #414042;
                         display: block;
@@ -303,7 +301,6 @@
                         transition: all .2s ease-in;
                         border: 1px solid #5c5c5c;
 
-                        
                         li {
                             color: #424041;
                             background: white;
@@ -318,7 +315,7 @@
                         }
                     }
 
-                    .showdropdown { 
+                    .showdropdown {
                         opacity: 0;
                         visibility: hidden;
                         transform: translateY(-1rem);
@@ -373,7 +370,7 @@
                     }
                 }
             }
-            
+
             %button {
                 text-align: center;
                 font: normal normal 600 16px/30px Poppins;
@@ -510,7 +507,6 @@
                     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
                     grid-gap: 2rem;
 
-
                     .carousel-image {
                         width: 100%;
 
@@ -521,7 +517,7 @@
                     }
                 }
             }
-            
+
             .sub-section--2 {
                 justify-content: space-between;
 
@@ -548,7 +544,6 @@
                     padding: 0 1rem;
                 }
 
-                
                 .input--12 {
                     gap: 2rem;
 
@@ -582,9 +577,8 @@
                     }
                 }
 
-                
                 .upload-container {
-                    @extend %upload; 
+                    @extend %upload;
 
                     .image {
                         padding: 0;
@@ -599,7 +593,6 @@
 
                 .edit {
                     @extend %edit;
-                    
 
                     &-container {
                         @extend %container;
@@ -692,13 +685,11 @@
                 }
             }
 
-
         }
 
         .select {
             cursor: pointer
         }
-
 
     }
 

@@ -1,12 +1,12 @@
 <template>
     <div class="dash--login flex--3">
-        
+
         <form class='login-form' @submit.prevent="handleSubmit">
-            <h1>Welcome to Canaan Towers</h1> 
+            <h1>Welcome to Canaan Towers</h1>
             <p>Login to continue</p>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email"> 
+                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email">
             </div>
             <div class='input-label'>
                 <label for="newTwoot"></label>
@@ -20,42 +20,42 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                form: {
-                    email: '',
-                    password: '' 
-                },
-            }
-        },
-        methods: {  
-            async handleSubmit () {
-                let data = {...this.form}
-                this.form = {};
-                const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                }
-                try {
-                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions);
-                    const response = await request.json();
-                    let user = JSON.stringify(response.data)
-                    let timeOut = new Date().getTime() + 3600000
-                    localStorage.setItem('admin', user)
-                    localStorage.setItem('timeOut', timeOut)
-                    console.log('admin', response);
-                    if(response.status === 'success') {
-                        console.log('e de alright')
-                        this.$router.push('/admin/dashboard')
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-        }
+export default {
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
     }
+  },
+  methods: {
+    async handleSubmit () {
+      const data = { ...this.form }
+      this.form = {}
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }
+      try {
+        const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions)
+        const response = await request.json()
+        const user = JSON.stringify(response.data)
+        const timeOut = new Date().getTime() + 3600000
+        localStorage.setItem('admin', user)
+        localStorage.setItem('timeOut', timeOut)
+        console.log('admin', response)
+        if (response.status === 'success') {
+          console.log('e de alright')
+          this.$router.push('/admin/dashboard')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +77,6 @@
             border-radius: 10px;
             position: relative;
             overflow: hidden;
-
 
             .input-label {
                 margin: 0 0 1rem 0;

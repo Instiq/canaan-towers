@@ -3,12 +3,9 @@
     <b-carousel
       class="carousel-main"
       id="carousel-1"
-      v-model="slide"
       :interval="4000"
       controls
       indicators
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
     >
       <!-- Slides with custom text -->
       <b-carousel-slide :img-src="getImgUrl(val)" v-for="(val, index) in mainCarousel.picture" :key=index
@@ -27,8 +24,18 @@ export default {
   props: ['mainCarousel'],
   methods: {
     getImgUrl (image) {
-      var images = require.context('../../assets/images/', false, /\.png$/)
-      return images('./' + image + '.png')
+      let img = image.split('.')
+      img = img[img.length - 1]
+      if (img === 'jpg') {
+        const images = require.context('../../assets/images/', false, /\.jpg$/)
+        return images('./' + image)
+      } else if (img === 'png') {
+        const images = require.context('../../assets/images/', false, /\.png$/)
+        return images('./' + image)
+      } else if (img === 'svg') {
+        const images = require.context('../../assets/images/', false, /\.svg$/)
+        return images('./' + image)
+      }
     }
   }
 }

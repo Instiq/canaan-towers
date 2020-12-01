@@ -5,22 +5,22 @@
       <div>
         <line-chart></line-chart>
       </div>
-    
+
     </div>
-    
+
   </section>
 </template>
 
 <script>
-  import LineChart from './LineChart.js'
+import LineChart from './LineChart.js'
 
-  export default {
-    name: 'VueChartJS',
-    components: {
-      LineChart,
-    
-    }
+export default {
+  name: 'VueChartJS',
+  components: {
+    LineChart
+
   }
+}
 </script>
 
 <style lang="scss" scoped>

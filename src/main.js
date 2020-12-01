@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faFacebook, faLinkedin, faCalendarMinus, faTwitter, faYoutube, faSearch, faChevronDown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 VuexRouterSync.sync(store, router)
-Vue.use(VueGoodTablePlugin) 
+Vue.use(VueGoodTablePlugin)
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)

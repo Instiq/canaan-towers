@@ -33,8 +33,8 @@ export default {
       },
       mainCarousel: {
         picture: [
-          'roofing-main-carousel-1',
-          'roofing-main-carousel-2'
+          'roofing-main-carousel-1.jpg',
+          'roofing-main-carousel-2.png'
         ],
         header: [
           'product-type',

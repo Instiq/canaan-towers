@@ -33,8 +33,8 @@ export default {
       },
       mainCarousel: {
         picture: [
-          'automobile-sales-main-carousel-1',
-          'automobile-sales-main-carousel-2'
+          'automobile-sales-main-carousel-1.jpg',
+          'automobile-sales-main-carousel-2.jpg'
         ]
       },
       relatedProjects: {
