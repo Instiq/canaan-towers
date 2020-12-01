@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
-
 import * as actions from './Auth/Api'
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -36,9 +36,9 @@ export default new Vuex.Store({
       ],
       slider: ['road-work-slide-1', 'road-work-slide-2', 'road-work-slide-3', 'road-work-slide-4', 'road-work-slide-5']
     },
-    partners: ['partner-1', 'partner-2', 'partner-3', 'partner-4', 'partner-5'],
+    partners: ['partner-1.png', 'partner-2.png', 'partner-3.png', 'partner-4.png', 'partner-5.png'],
     title: 'hello boy',
-    items:[]
+    items: []
   },
   mutations: {
     changePicture (state) {
@@ -49,19 +49,19 @@ export default new Vuex.Store({
     SET_DATA: (state, items) => {
       state.items = items
     }
-  }, 
+  },
   actions,
   modules: {
   },
-  getters: { 
+  getters: {
     serviceData (state) {
       return state.serviceData
     },
     partners (state) {
       return state.partners
     },
-    title () {
-      return state.title 
+    title (state) {
+      return state.title
     }
   }
 })

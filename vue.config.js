@@ -11,4 +11,3 @@ module.exports = {
     },
     lintOnSave: false
 }
- 

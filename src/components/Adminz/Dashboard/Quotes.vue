@@ -34,27 +34,27 @@
 </template>
 
 <script>
-    import Navbar from '@/components/Adminz/Dashboard/Navbar'
-    export default {
-        components: {
-            Navbar
-        },
-        data() {
-            return {
-                quotes: ''
-            }
-        },
-        async created () {
-            try {
-                const request = await fetch('http://localhost:5000/quote/admin');
-                const response = await request.json();
-                console.log('quotes', response);
-                this.quotes = response
-            } catch (err) {
-                console.log(err);
-            }
-        }  
+import Navbar from '@/components/Adminz/Dashboard/Navbar'
+export default {
+  components: {
+    Navbar
+  },
+  data () {
+    return {
+      quotes: ''
     }
+  },
+  async created () {
+    try {
+      const request = await fetch('http://localhost:5000/quote/admin')
+      const response = await request.json()
+      console.log('quotes', response)
+      this.quotes = response
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -92,13 +92,11 @@
                     font-size: 13px
                 }
             }
-            
+
             table {
                 width: 100%;
                 font: 14px;
             }
-
-            
 
             td, th {
                 text-align: left;
@@ -111,7 +109,6 @@
             }
 
         }
-            
-            
+
     }
 </style>

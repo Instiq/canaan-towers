@@ -8,18 +8,17 @@
 <script>
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
-import Api from '@/store/Auth/Api'
-// import { mapState } from 'vuex'
 
-
+// import Api from '@/store/Auth/Api'
+import { mapState } from 'vuex'
 
 export default {
-  data () { 
+  data () {
     return {
       headerMain: {
         leftHeader: 'The Best Place For All You Need...',
         leftText: 'Simplifying the complexities of human desires is our specialty. We are for you.'
-      },
+      }
     }
   },
   components: {
@@ -31,14 +30,14 @@ export default {
   },
   mounted () {
   },
-  computed:  {
-    ...mapState ([
+  computed: {
+    ...mapState([
       'items'
     ])
     // Add other computed properties here
-  },  
+  },
   methods: {
-    
+
   }
 }
 </script>

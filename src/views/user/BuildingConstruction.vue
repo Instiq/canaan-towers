@@ -30,8 +30,8 @@ export default {
       },
       mainCarousel: {
         picture: [
-          'building-construction-main-carousel-1',
-          'building-construction-main-carousel-2'
+          'building-construction-main-carousel-1.jpg',
+          'building-construction-main-carousel-2.jpg'
         ]
       },
       relatedProjects: {

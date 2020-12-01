@@ -34,9 +34,9 @@
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+
+}
 </script>
 
 <style lang="scss">
@@ -58,15 +58,14 @@
             display: flex;
             white-space: nowrap;
             margin: 10rem 0 0 0;
-            
+
         }
 
         &-link {
             width: 100%;
             padding-left: 2vw;
-            position: relative; 
-            
-            
+            position: relative;
+
             .flex--2 {
                 flex-direction: row-reverse;
                 justify-content: flex-end;
@@ -77,9 +76,9 @@
                     fill: #ACACAC;
                     color: #ACACAC;
                     font-size: 100px
-                } 
-       
-            }   
+                }
+
+            }
 
             a, a:hover {
                 list-style: none;
@@ -106,7 +105,7 @@
                     fill: #303030;
                 }
             }
-            
+
         }
     }
 </style>

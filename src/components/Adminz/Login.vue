@@ -1,12 +1,12 @@
 <template>
     <div class="dash--login flex--3">
-        
+
         <form class='login-form' @submit.prevent="handleSubmit">
-            <h1>Welcome to Canaan Towers</h1> 
+            <h1>Welcome to Canaan Towers</h1>
             <p>Login to continue</p>
             <div class='input-label'>
                 <label for="newTwoot"></label>
-                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email"> 
+                <input id="newTwoot" placeholder="Email Address" type="text"  v-model="form.email">
             </div>
             <div class='input-label'>
                 <label for="newTwoot"></label>
@@ -55,7 +55,12 @@
                 }
             }
         }
+      } catch (error) {
+        console.log(error)
+      }
     }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +82,6 @@
             border-radius: 10px;
             position: relative;
             overflow: hidden;
-
 
             .input-label {
                 margin: 0 0 1rem 0;

@@ -33,8 +33,8 @@ export default {
       },
       mainCarousel: {
         picture: [
-          'alternative-power-main-carousel-1',
-          'alternative-power-main-carousel-2'
+          'alternative-power-main-carousel-1.jpg',
+          'alternative-power-main-carousel-2.png'
         ]
       },
       relatedProjects: {
