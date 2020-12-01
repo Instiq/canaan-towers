@@ -48,12 +48,10 @@
                 let admin= JSON.parse(localStorage.getItem('admin'))
                 let Authorize = admin && admin.token
                 let headers =  {
-                    // Accept: 'application/json',
-                    Authorization: `Bearer ${Authorize}`,
-                    'Content-Type':  'application/x-www-form-urlencoded'
+                    Authorization: `Bearer ${Authorize}`
                 }
                 console.log(Authorize, 'Authorize', headers)
-
+ 
                 // convert request name to Sentence case
                 var toTitleCase = function (str) { 
                     str = str.toLowerCase().split(' ');
@@ -64,12 +62,9 @@
                 };
                 
                 let name = toTitleCase(this.form.name)
-                let data = {...this.form}
 
-                console.log('Authorize', headers)
                 const formData = new FormData()
-                formData.append('image', this.image, this.image.name)
-                formData.append('name', name)
+                formData.append('image', this.image)
                 formData.append('name', name)
                 formData.append('email', this.form.email)
                 formData.append('number', this.form.number)
@@ -78,12 +73,11 @@
                 const requestOptions = {
                     method: 'POST',
                     headers,
-                    body: JSON.stringify(data)
+                    body: formData
                 }
                 try {
-                    const request = await fetch('http://localhost:8080/admin/create', requestOptions);
+                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/create', requestOptions);
                     const response = await request.json();
-                    console.log('local mom', response)
                 } catch (err) {
                     console.log(err);
                 }  

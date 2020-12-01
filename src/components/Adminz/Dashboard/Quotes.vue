@@ -46,7 +46,7 @@ export default {
   },
   async created () {
     try {
-      const request = await fetch('http://localhost:5000/quote/admin')
+      const request = await fetch('https://canaan-towers-api.herokuapp.com/quote/admin')
       const response = await request.json()
       console.log('quotes', response)
       this.quotes = response

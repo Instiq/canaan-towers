@@ -38,7 +38,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 }
-                try {
+                try { 
                     const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions);
                     const response = await request.json();
                     let user = JSON.stringify(response.data)
