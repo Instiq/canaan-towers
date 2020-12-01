@@ -88,7 +88,7 @@
               <b-col class="upload__file text-center" cols="12" md="6">
                 <img src="../../assets/images/Icon-upload.svg" alt="" class="" />
                 <div class="mt-4 drag-and-drop">
-                  <h5>Drag & Drop</h5>
+                  <h5>Drag & Drop </h5>
                   <h6>Supported format files</h6>
                   <div
                     class="d-flex justify-content-between upload__file--type"
