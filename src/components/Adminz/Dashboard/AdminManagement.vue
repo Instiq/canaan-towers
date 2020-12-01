@@ -70,16 +70,6 @@
             }  
         }
     }
-    try {
-      const request = await fetch('http://localhost:8080/admins', { headers })
-      const response = await request.json()
-      this.admins = response
-      this.loading = false
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
 </script>
 
 <style lang="scss" scoped>
