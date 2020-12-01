@@ -35,6 +35,9 @@ export default {
       } else if (img === 'svg') {
         const images = require.context('../../assets/images/', false, /\.svg$/)
         return images('./' + image)
+      } else if (img === 'jpeg') {
+        const images = require.context('../../assets/images/', false, /\.jpeg$/)
+        return images('./' + image)
       }
     }
   }
