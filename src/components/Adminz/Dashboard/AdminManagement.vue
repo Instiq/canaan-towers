@@ -60,7 +60,7 @@
                     Authorization: `Bearer ${Authorize}`,
             }
                 try {
-                    const request = await fetch('http://localhost:8080/admins', { headers });
+                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admins', { headers });
                     const response = await request.json();
                     this.admins = response;
                     this.loading = false;
