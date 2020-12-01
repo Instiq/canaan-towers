@@ -41,7 +41,7 @@
                     <div v-for='image in carousels' :key='image._id' class="flex--2">
                         <div class="carousel-image flex--3">
                             <div class="img-container">
-                                <img src="image.carousel" alt='carousel'/>
+                                <img :src="image.carousel" alt='carousel'/>
                             </div>
                             <p @click='confirm = true; selectedCarousel(image)'>Delete</p>
                         </div>
@@ -150,7 +150,7 @@
                 toggle: true
             }
         },
-        components: {
+        components: { 
             Navbar
         },
         async created () {
@@ -181,7 +181,7 @@
                 let Authorized = admin && admin.token
                 try {
                     console.log(id, Authorized, '1234')
-                    const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
+                    const request = await axios.delete(`http://localhost:8080/building/carousel/${id}`, {
                         headers: {
                             'Accept': 'application/json',
                             'Authorization': `Bearer ${Authorized}`,

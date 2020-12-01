@@ -206,7 +206,7 @@ export default {
       let description = 'asdf'
       console.log(1, forss, title, description, this.image.name)
       forss.append('image', this.image, this.image.name)
-      forss.append('title', title)
+      forss.append('name', name)
       forss.append('description', description)
       console.log('boyoboy')
       let a = await axios.post('https://canaan-towers-api.herokuapp.com/building/slider', forss)

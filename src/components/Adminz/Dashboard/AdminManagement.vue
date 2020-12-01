@@ -58,8 +58,7 @@
             let headers =  {
                     Accept: 'application/json',
                     Authorization: `Bearer ${Authorize}`,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
+            }
                 try {
                     const request = await fetch('http://localhost:8080/admins', { headers });
                     const response = await request.json();
@@ -67,6 +66,7 @@
                     this.loading = false;
                 } catch (err) {
                     console.log(err);
+                    this.loading = false;
             }  
         }
     }
