@@ -26,7 +26,7 @@
                 form: {
                     email: '',
                     password: '' 
-                },
+                }, 
             }
         },
         methods: {  
@@ -39,7 +39,7 @@
                     body: JSON.stringify(data)
                 }
                 try {
-                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions);
+                    const request = await fetch('http://localhost:8080/admin/login', requestOptions);
                     const response = await request.json();
                     let user = JSON.stringify(response.data)
                     let timeOut = new Date().getTime() + 3600000

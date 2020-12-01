@@ -41,24 +41,34 @@
 </template>
 
 <script>
-import Navbar from '@/components/Adminz/Dashboard/Navbar'
-export default {
-  components: {
-    Navbar
-  },
-  data () {
-    return {
-      admins: '',
-      loading: true
-    }
-  },
-  async created () {
-    const admin = JSON.parse(localStorage.getItem('admin'))
-    const Authorize = admin && admin.token
-    const headers = {
-      Accept: 'application/json',
-      Authorization: `Bearer ${Authorize}`,
-      'Content-Type': 'application/x-www-form-urlencoded'
+    import Navbar from '@/components/Adminz/Dashboard/Navbar'
+    export default {
+        components: {
+            Navbar
+        },
+        data(){
+            return {
+                admins: '',
+                loading: true
+            }
+        },
+        async created () {
+            let admin= JSON.parse(localStorage.getItem('admin'))
+            let Authorize = admin && admin.token
+            let headers =  {
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${Authorize}`,
+            }
+                try {
+                    const request = await fetch('http://localhost:8080/admins', { headers });
+                    const response = await request.json();
+                    this.admins = response;
+                    this.loading = false;
+                } catch (err) {
+                    console.log(err);
+                    this.loading = false;
+            }  
+        }
     }
     try {
       const request = await fetch('http://localhost:8080/admins', { headers })

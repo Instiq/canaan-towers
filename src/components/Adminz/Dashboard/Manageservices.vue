@@ -41,7 +41,7 @@
                     <div v-for='image in carousels' :key='image._id' class="flex--2">
                         <div class="carousel-image flex--3">
                             <div class="img-container">
-                                <img src="image.carousel" alt='carousel'/>
+                                <img :src="image.carousel" alt='carousel'/>
                             </div>
                             <p @click='confirm = true; selectedCarousel(image)'>Delete</p>
                         </div>
@@ -127,109 +127,111 @@
 </template>
 
 <script>
-import Navbar from './Navbar'
-import axios from 'axios'
+    import Navbar from './Navbar'
+    import axios from 'axios'
 
-export default {
-  data () {
-    return {
-      show: 'carousel',
-      editCatalogue: false,
-      editProject: false,
-      items: [],
-      carousels: [],
-      singleCarousel: {},
-      catalogues: [],
-      singleCatalogue: {},
-      projects: [],
-      singleProject: {},
-      confirm: false,
-      serviceCategory: 'carousel',
-      service: 'building',
-      services: 'Building Construction',
-      toggle: true
-    }
-  },
-  components: {
-    Navbar
-  },
-  async created () {
-    try {
-      const request = await fetch('https://canaan-towers-api.herokuapp.com/building/carousel')
-      const response = await request.json()
-      console.log('building', response)
-      this.carousels = response
-    } catch (err) {
-      console.log(err)
-    }
-  },
-  methods: {
-    selectedCarousel (carousel) {
-      this.singleCarousel = carousel
-    },
-    selectCatalogue (catalogue) {
-      this.singleCatalogue = catalogue
-    },
-    selectProject (project) {
-      this.singleProject = project
-      console.log('why', this.singleProject)
-    },
-
-    async deleteCarousel () {
-      const id = this.singleCarousel._id
-      const admin = JSON.parse(localStorage.getItem('admin'))
-      const Authorized = admin && admin.token
-      try {
-        console.log(id, Authorized, '1234')
-        const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${Authorized}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
-        console.log('request', request.data)
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    async fetchService () {
-      console.log(this.service)
-      console.log(this.serviceCategory, 'carousel')
-      if (this.serviceCategory === 'carousel') {
-        try {
-          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
-          const response = await request.json()
-          console.log('local trial', response.carousel)
-          this.carousels = response
-        } catch (err) {
-          console.log(err)
-        }
-      }
-      if (this.serviceCategory === 'catalogue') {
-        try {
-          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
-          const response = await request.json()
-          console.log('building', response)
-          this.catalogues = response
-        } catch (err) {
-          console.log(err)
-        }
-      }
-      if (this.serviceCategory === 'slider') {
-        try {
-          const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`)
-          const response = await request.json()
-          console.log('building', response)
-          this.projects = response
-          console.log('projectssssss', this.projects)
-        } catch (err) {
-          console.log(err)
-        }
-      }
-    },
-    toggler () {
-      this.toggle = !this.toggle
+    export default {
+        data() {
+            return {
+                show: 'carousel',
+                editCatalogue: false,
+                editProject: false,
+                items: [],
+                carousels: [],
+                singleCarousel: {},
+                catalogues: [],
+                singleCatalogue: {},
+                projects: [],
+                singleProject: {},
+                confirm: false,
+                serviceCategory: 'carousel',
+                service: 'building',
+                services: 'Building Construction',
+                toggle: true
+            }
+        },
+        components: { 
+            Navbar
+        },
+        async created () {
+            try {
+                const request = await fetch('https://canaan-towers-api.herokuapp.com/building/carousel');
+                const response = await request.json();
+                console.log('building', response)
+                this.carousels = response;
+            } catch (err) {
+                console.log(err);
+            }  
+        },
+        methods: {
+            selectedCarousel(carousel) {
+                this.singleCarousel = carousel;
+            },
+            selectCatalogue(catalogue) {
+                this.singleCatalogue = catalogue;
+            },
+            selectProject(project) {
+                this.singleProject = project;
+                console.log('why',this.singleProject)
+            },
+            
+            async deleteCarousel() {
+                let id = this.singleCarousel._id;
+                let admin= JSON.parse(localStorage.getItem('admin'))
+                let Authorized = admin && admin.token
+                try {
+                    console.log(id, Authorized, '1234')
+                    const request = await axios.delete(`http://localhost:8080/building/carousel/${id}`, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${Authorized}`,
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+                    console.log('request', request.data)
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+            async fetchService() {
+                console.log(this.service)
+                console.log(this.serviceCategory, 'carousel')
+                if (this.serviceCategory === 'carousel') {
+                    try {
+                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
+                    const response = await request.json();
+                    console.log('local trial', response.carousel)
+                    this.carousels = response;
+                    } catch (err) {
+                        console.log(err);
+                    }  
+                }
+                if (this.serviceCategory === 'catalogue') {
+                    try {
+                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
+                    const response = await request.json();
+                    console.log('building', response)
+                    this.catalogues = response;
+                    } catch (err) {
+                        console.log(err);
+                    }  
+                }
+                if (this.serviceCategory === 'slider') {
+                    try {
+                    const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
+                    const response = await request.json();
+                    console.log('building', response)
+                    this.projects = response;
+                    console.log('projectssssss', this.projects)
+                    } catch (err) {
+                        console.log(err);
+                    }  
+                }
+                },
+                toggler() {
+                    this.toggle = !this.toggle
+                }
+            }
     }
   }
 }
