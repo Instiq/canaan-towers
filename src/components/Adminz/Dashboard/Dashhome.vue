@@ -17,15 +17,12 @@ export default {
   },
   methods: {
     reload () {
-      console.log('qwert')
       this.$router.push('/admin')
     }
   },
   mounted () {
-    console.log('water')
     const checkExpiration = () => {
       var values = localStorage.getItem('timeOut')
-      console.log('what', values)
       if (values < new Date().getTime()) {
         localStorage.removeItem('timeOut')
         localStorage.removeItem('admin')
@@ -34,7 +31,7 @@ export default {
     }
     checkExpiration()
     const intervalCheck = () => {
-      var myinterval = 15 * 60 * 1000 // 15 mins interval
+      var myinterval = 5 * 60 * 1000 // 15 mins interval
       setInterval(
         function () {
           checkExpiration()

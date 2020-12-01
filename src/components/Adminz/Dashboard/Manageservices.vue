@@ -181,7 +181,7 @@
                 let Authorized = admin && admin.token
                 try {
                     console.log(id, Authorized, '1234')
-                    const request = await axios.delete(`http://localhost:8080/building/carousel/${id}`, {
+                    const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
                         headers: {
                             'Accept': 'application/json',
                             'Authorization': `Bearer ${Authorized}`,
@@ -282,9 +282,9 @@
                         cursor: pointer;
                         width: 150px;
                         white-space: nowrap;
-                        padding: .7rem 2rem .7rem 0.5rem;
+                        padding: .5rem 2rem .5rem 0.5rem;
                         text-align: center;
-                    }
+                    } 
 
                     .iconDrop {
                         padding-left: 9rem;
@@ -294,7 +294,7 @@
                     .payLinks {
                         list-style: none;
                         position: absolute;
-                        top: 3rem;
+                        top: 2.7rem;
                         left: 1px;
                         // padding: 0.1rem -0.1rem 0.1rem .1rem;
                         transform: translateY(0rem);

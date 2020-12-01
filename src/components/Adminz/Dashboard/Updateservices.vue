@@ -5,87 +5,81 @@
             <div class="flex--2 choose">
                 <div class="flex--2">
                     <label for="cars" class="category-label">Choose a Service :</label>
-                    <select id="cars" class="select">
-                        <option value="Building Construction">Building Construction</option>
-                        <option value="Alternative Power">Alternative Power</option>
-                        <option value="Interior Furnishing">Interior Furnishing</option>
-                        <option value="Automobile Sales & Furnishing">Automobile Sales & Furnishing</option>
-                        <option value="Road Work">Road Work</option>
-                        <option value="Roofing Sheets">Roofing Sheets</option>
-                    </select>
-                </div>
+                    <div class='dropdown'>
+                        <h5 @click="toggler()" >{{services}}</h5>
+                        <ul class="payLinks" :class="{ 'showdropdown':  toggle  }" @click="toggle = !toggle">
+                            <li @click="service = 'building'; services = 'Building Construction'">Building Construction</li>
+                            <li @click="service = 'power'; services = 'Alternative Power'">Alternative Power</li>
+                            <li @click="service = 'furnish'; services = 'Interior Furnishing'">Interior Furnishing</li>
+                            <li @click="service = 'automobile'; services = 'Automobile Sales'">Automobile Sales</li>
+                            <li @click="service = 'road'; services = 'Road Work'">Road Work</li>
+                            <li @click="service = 'roof'; services = 'Roofing Sheets'">Roofing Sheets</li>
+                        </ul>
+                    </div>
+                </div> 
                 <div class="flex--2 choose-category">
                     <div class="category-label">
                         <p>Category to Update : </p>
                     </div>
-                    <button @click="show = 'carousel'" :class="{'button--notactive': show !== 'carousel'}">Carousel</button>
-                    <button @click="show = 'catalogue'" :class="{'button--notactive': show !== 'catalogue'}">Catalogue</button>
-                    <button @click="show = 'project'" :class="{'button--notactive': show !== 'project'}">Project</button>
+                    <button @click="show = 'carousel'; serviceCategory ='carousel';" :class="{'button--notactive': show !== 'carousel'}">Carousel</button>
+                    <button @click="show = 'catalogue'; serviceCategory ='catalogue';" :class="{'button--notactive': show !== 'catalogue'}" v-if="service !== 'building' && service !== 'road'">Catalogue</button>
+                    <button @click="show = 'project'; serviceCategory ='slider';" :class="{'button--notactive': show !== 'project'}">Project</button>
                 </div>
             </div>
-            <section class="sub-section--1 flex--2" v-if="show === 'carousel'">
+            <form @submit.prevent="postService" class="sub-section--1 flex--2" v-if="show === 'carousel'">
                 <div class="upload">
-                    <h1>Add Carousel</h1>
+                    <p><input type="file" @change="fileSelected"></p>
                 </div>
                 <div class="upload--1 flex--3">
                     <p class="upload--2">Display image</p>
-                    <button>Add +</button>
+                    <button  type='submit'>Add +</button>
                 </div>
-            </section>
-            <section class='sub-section--2 flex--1' v-else-if="show === 'catalogue'">
+            </form>
+            <form @submit.prevent="postService" class='sub-section--2 flex--1' v-else-if="show === 'catalogue'">
                 <div class="flex--3 input-main">
                     <div class="flex--2 input--12">
                         <div class="flex--3">
                             <label>Product</label>
-                            <input placeholder="Enter product name"/>
+                            <input placeholder="Enter product name"  v-model='catalogue.item'/>
                         </div>
                         <div class="flex--3">
                             <label>Price</label>
-                            <input placeholder="Enter product name"/>
+                            <input placeholder="Enter product name"  v-model='catalogue.price'/>
                         </div>
                     </div>
                     <div class='flex--3 input--2'>
                         <div class="flex--3">
                             <label>Product Description</label>
-                            <input placeholder=""/>
+                            <input placeholder="Description"  v-model='catalogue.description'/>
                         </div>
                         <div class="flex--3">
                             <label>Specification</label>
-                            <input placeholder=""/>
-                        </div>
-                        <div class="flex--3">
-                            <label>Product</label>
-                            <input placeholder=""/>
+                            <input placeholder="Specification" v-model='catalogue.specification'/>
                         </div>
                     </div>
                 </div>
                 <div class="input--3">
-                    <div class="flex--3">
-                        <label>Product</label>
-                        <input placeholder="Enter product name"/>
-                    </div>
                     <div class="upload-container flex--3">
                         <div class="image">
                             Upload image
                         </div>
-                        <p>Browse</p>
-                        <button>Create</button>
+                        <p><input type="file" @change="fileSelected"></p>                        <button>Create</button>
                     </div>
                 </div>
-            </section>
-            <section class='sub-section--3 flex--1'  v-else-if="show === 'project'">
+            </form>
+            <form @submit.prevent="postService" class='sub-section--3 flex--1'  v-else-if="show === 'project'">
                 <div class="flex--3 input--1">
-                    <input placeholder="Title"/>
-                    <input placeholder="Description"/>
-                    <button>Create</button>
+                    <input placeholder="Title" v-model='project.title'/>
+                    <input placeholder="Description" v-model='project.description'/>
+                    <button type='submit'>Create</button>
                 </div>
                 <div class="upload-container flex--3">
                     <div class="image">
                         Upload image
                     </div>
-                    <p>Browse</p>
+                    <p><input type="file" @change="fileSelected"></p>
                 </div>
-            </section>
+            </form>
         </main>
     </div>
 </template>
@@ -95,10 +89,102 @@ import Navbar from './Navbar'
 export default {
   data () {
     return {
-      show: 'project',
-      items: []
+        show: 'carousel',
+        items: [],
+        toggle: true,
+        service: 'building',
+        services: 'Building Construction',
+        serviceCategory: 'carousel',
+        image: '',
+        catalogue: {
+            item: '',
+            price: '',
+            description: '',
+            specification: '',
+        },
+        project: {
+            title: '',
+            description: '',
+        }
     }
   },
+  methods: {
+    toggler() {
+        this.toggle = !this.toggle
+    },
+    fileSelected(event){
+        this.image = event.target.files[0]
+        console.log(this.image)
+    },
+    async postService() {
+        console.log(this.service)
+        console.log(this.serviceCategory, 'carousel')
+        let admin= JSON.parse(localStorage.getItem('admin'))
+        let Authorize = admin && admin.token
+        let headers =  {
+            Authorization: `Bearer ${Authorize}`
+        }
+        if (this.serviceCategory === 'carousel') {
+            const formData = new FormData()
+            formData.append('image', this.image)
+            const requestOptions = {
+                method: 'POST',
+                headers,
+                body: formData
+            }
+            try {
+                const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`, requestOptions);
+                const response = await request.json();
+                console.log(response);
+                this.image = ''
+            } catch (err) {
+                console.log(err);
+            }   
+        }
+        if (this.serviceCategory === 'catalogue') {
+
+            const formData = new FormData()
+            formData.append('image', this.image)
+            formData.append('item',  this.catalogue.item)
+            formData.append('price', this.catalogue.price)
+            formData.append('description', this.catalogue.description)
+            formData.append('specification', this.catalogue.specification)
+            const requestOptions = {
+                method: 'POST',
+                headers,
+                body: formData
+            }
+            try {
+                const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`, requestOptions);
+                const response = await request.json();
+                console.log(response, 'catalogue');
+                this.image = ''
+            } catch (err) {
+                console.log(err);
+            }  
+        }
+        if (this.serviceCategory === 'slider') {
+            const formData = new FormData()
+            formData.append('image', this.image)
+            formData.append('title',  this.project.title)
+            formData.append('description', this.project.description)
+            console.log('it gotnher', formData)
+            const requestOptions = {
+                method: 'POST',
+                headers,
+                body: formData
+            }
+            try {
+                const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`, requestOptions);
+                const response = await request.json();
+                console.log(response, 'project');
+                this.image = ''
+            } catch (err) {
+                console.log(err);
+            }  
+        }
+        }
+},
   components: {
     Navbar
   }
@@ -138,6 +224,61 @@ export default {
                 label {
                     margin: 0;
                 }
+
+                .dropdown {
+                    position: relative;
+                    margin: .5rem 0 0 1rem;
+                    font-size: 14px;
+
+                    h5 {
+                        color: #414042;
+                        display: block;
+                        border: 1px solid #5c5c5c;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        width: 150px;
+                        white-space: nowrap;
+                        padding: .5rem 2rem .5rem 0.5rem;
+                        text-align: center;
+                    } 
+
+                    .iconDrop {
+                        padding-left: 9rem;
+                        color: #414042
+                    }
+
+                    .payLinks {
+                        list-style: none;
+                        position: absolute;
+                        top: 2.7rem;
+                        left: 1px;
+                        // padding: 0.1rem -0.1rem 0.1rem .1rem;
+                        transform: translateY(0rem);
+                        transition: all .2s ease-in;
+                        border: 1px solid #5c5c5c;
+
+                        li {
+                            color: #424041;
+                            background: white;
+                            padding: .5rem;
+                            transition: all .3s;
+                            cursor: pointer;
+                            font-size: 14px;
+
+                            &:hover {
+                                background: #e8e7e7;;
+                            }
+                        }
+                    }
+
+                    .showdropdown {
+                        opacity: 0;
+                        visibility: hidden;
+                        transform: translateY(-1rem);
+
+                    }
+                }
+
 
                 &-category {
                     // flex: 0 0 60%;
@@ -283,7 +424,9 @@ export default {
                     flex: 0 0 40%;
 
                     button {
-                        @extend %button
+                        @extend %button;
+                        height: 35px;
+                        width: 150px;
                     }
                 }
 
