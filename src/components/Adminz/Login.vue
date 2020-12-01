@@ -20,35 +20,40 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      form: {
-        email: '',
-        password: ''
-      }
-    }
-  },
-  methods: {
-    async handleSubmit () {
-      const data = { ...this.form }
-      this.form = {}
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }
-      try {
-        const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions)
-        const response = await request.json()
-        const user = JSON.stringify(response.data)
-        const timeOut = new Date().getTime() + 3600000
-        localStorage.setItem('admin', user)
-        localStorage.setItem('timeOut', timeOut)
-        console.log('admin', response)
-        if (response.status === 'success') {
-          console.log('e de alright')
-          this.$router.push('/admin/dashboard')
+    export default {
+        data () {
+            return {
+                form: {
+                    email: '',
+                    password: '' 
+                },
+            }
+        },
+        methods: {  
+            async handleSubmit () {
+                let data = {...this.form}
+                this.form = {};
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }
+                try {
+                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/login', requestOptions);
+                    const response = await request.json();
+                    let user = JSON.stringify(response.data)
+                    let timeOut = new Date().getTime() + 3600000
+                    localStorage.setItem('admin', user)
+                    localStorage.setItem('timeOut', timeOut)
+                    console.log('admin', response);
+                    if(response.status === 'success') {
+                        console.log('e de alright')
+                        this.$router.push('/admin/dashboard')
+                    }
+                } catch (errors) {
+                    console.log(errors);
+                }
+            }
         }
       } catch (error) {
         console.log(error)

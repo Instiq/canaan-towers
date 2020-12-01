@@ -2,16 +2,13 @@
     <div>
         <app-header :headerMain="headerMain"></app-header>
         <app-whatsapp></app-whatsapp>
-        <div v-for="item in items" :key="item.id">
-          <h1>hello {{ item.image }}</h1>
-          <img :src='item.image' style="width: 500px; height: 1p"/>
-        </div>
     </div>
 </template>
 
 <script>
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
+
 // import Api from '@/store/Auth/Api'
 import { mapState } from 'vuex'
 
