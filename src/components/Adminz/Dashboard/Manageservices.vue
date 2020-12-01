@@ -174,7 +174,6 @@
                 this.singleProject = project;
                 console.log('why',this.singleProject)
             },
-            
             async deleteCarousel() {
                 let id = this.singleCarousel._id;
                 let admin= JSON.parse(localStorage.getItem('admin'))
@@ -189,6 +188,7 @@
                         }
                     });
                     console.log('request', request.data)
+                    this.fetchService()
                 } catch (err) {
                     console.log(err);
                 }
