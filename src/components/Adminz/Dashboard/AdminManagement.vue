@@ -18,6 +18,7 @@
                         <th scope="col">Phone Number</th>
                         <th scope="col">Date Created</th>
                         <th scope="col">Status</th>
+                        <th scope="col">view</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,12 +30,44 @@
                         <td>{{ admin.number }}</td>
                         <div class="status" v-if="admin.active"><td>Active</td></div>
                         <div class="status disabled" v-if="admin.active === false"><td>Disabled</td></div>
+                        <td><div class="view-admin" @click='selectedAdmin(admin); viewAdmin = true'><font-awesome-icon :icon="['fas', 'eye']" class="font"/></div></td>
                     </tr>
                 </tbody>
             </table>
             <div>
                 pagination
             </div>
+            <section class="flex--1 view--admin grid--1" v-if="viewAdmin">
+                <div class="admin--card flex--1">
+                   
+                        <img alt='sdf' :src="singleAdmin.image"/>
+                  
+                    <div class='flex--3 details--button'>
+                        <div class="flex--2 admin-details">
+                            <div class="flex--3">
+                                <h1>Name</h1>
+                                <p>{{singleAdmin.name}}</p>
+                            </div>
+                            <div class="flex--3">
+                                <h1>Email</h1>
+                                <p>{{singleAdmin.email}}</p>
+                            </div>
+                            <div class="flex--3">
+                                <h1>Phone No.</h1>
+                                <p>{{singleAdmin.number}}</p>
+                            </div>
+                            <div class="flex--3">
+                                <h1>Status</h1>
+                                <p>{{singleAdmin.active}}</p>
+                            </div>
+                        </div>
+                        <div class="flex--2">
+                            <button @click='viewAdmin = false'>Activate</button>
+                            <button  @click='viewAdmin = false; revokeAdmin()'>Disable</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </section>
     </div>
@@ -49,25 +82,55 @@
         data(){
             return {
                 admins: '',
-                loading: true
+                loading: true,
+                singleAdmin: '',
+                viewAdmin: false
             }
         },
-        async created () {
-            let admin= JSON.parse(localStorage.getItem('admin'))
-            let Authorize = admin && admin.token
-            let headers =  {
-                    Accept: 'application/json',
-                    Authorization: `Bearer ${Authorize}`,
+        methods: {
+            selectedAdmin(admin) {
+                this.singleAdmin = admin
+            },
+            async revokeAdmin() {
+                    let admin= JSON.parse(localStorage.getItem('admin'))
+                    let Authorize = admin && admin.token
+                    let headers =  {
+                        Authorization: `Bearer ${Authorize}`
+                    }
+                    let id = this.singleAdmin._id;
+                    const requestOptions = {
+                        method: 'PATCH',
+                        headers
+                    }
+                    try {
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/admin/revoke/${id}`, requestOptions);
+                        const response = await request.json();
+                        console.log(response);
+                        this.getAdmin()
+                    } catch (err) {
+                        console.log(err);
+                    }  
+            },
+            async getAdmin () {
+                let admin= JSON.parse(localStorage.getItem('admin'))
+                let Authorize = admin && admin.token
+                let headers =  {
+                        Accept: 'application/json',
+                        Authorization: `Bearer ${Authorize}`,
+                }
+                    try {
+                        const request = await fetch('https://canaan-towers-api.herokuapp.com/admins', { headers });
+                        const response = await request.json();
+                        this.admins = response;
+                        this.loading = false;
+                    } catch (err) {
+                        console.log(err);
+                        this.loading = false;
+                } 
             }
-                try {
-                    const request = await fetch('https://canaan-towers-api.herokuapp.com/admins', { headers });
-                    const response = await request.json();
-                    this.admins = response;
-                    this.loading = false;
-                } catch (err) {
-                    console.log(err);
-                    this.loading = false;
-            }  
+        },
+        async created () { 
+            this.getAdmin()
         }
     }
 </script>
@@ -121,7 +184,7 @@
             table {
                 white-space: nowrap;
                 font-size: 14px;
-                border: none;
+                border: none
             }
 
             td, th {
@@ -151,6 +214,81 @@
             // tr:nth-child(even) {
             //     background-color: #dddddd;
             // }
+
+            .view-admin {
+                color: #212529;
+                margin: -.3rem 0 0 1rem;
+                cursor: pointer
+            }
+
+
+            .view--admin {
+                position: fixed;
+                background-color: rgba(49, 49, 49, 0.166);
+                // height: 100vh;
+                width: 100vw;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+
+                .admin--card {
+                    background: #FFFFFF 0% 0% no-repeat padding-box;
+                    box-shadow: 0px 3px 6px #00000029;
+                    border-radius: 8px;
+                    // height: 400px;
+                    padding: 10rem 5rem;
+                    width: 60%;
+                    justify-content: space-between;
+
+                    h1 {
+                        font: normal normal 500 16px/27px Poppins;
+                        letter-spacing: 0px;
+                        color: #ACACAC;
+                    }
+
+                    p {
+                        font: normal normal 400 14px/24px Poppins;
+                        letter-spacing: 0px;
+                        color: #0C0500;
+                    }
+
+                    img {
+                        flex: 0 0 20%;
+                        width: 100%;
+                        width: 30px;
+                        border-radius: 50%;
+                        margin-right: 3rem;
+                        
+                    }
+
+                    // .img--container {
+                    //     border-radius: 50%;
+                    //     width: 100px;
+                    //     border: 2px solid red;
+                    // }
+                }
+
+                .details--button {
+                    flex: 1;
+
+                    button {
+                        width: 20%;
+                        height: 38px;
+                        background: #e36f1a 0% 0% no-repeat padding-box;
+                        margin: 0 3rem 0 0;
+                        font: normal normal 400 16px/27px Poppins;
+                        letter-spacing: 0px;
+                        color: #FFFFFF;
+                        border-radius: 5px;
+                    }
+                }
+
+                .admin-details {
+                    justify-content: space-between;
+                    margin-bottom: 4rem;
+                }
+            }
 
         }
 

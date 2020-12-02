@@ -11,7 +11,7 @@
                 </div>
                 <div class="upload-container flex--3">
                     <div class="image">
-                        Upload image
+                        Upload image 
                     </div>
                     <p><input type="file" @change="fileSelected"></p>
                 </div>

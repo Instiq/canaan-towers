@@ -220,6 +220,7 @@
                         const response = await request.json();
                         console.log(response, 'project');
                         this.image = ''
+                        editProject = false
                         this.fetchService()
                     } catch (err) {
                         console.log(err);
@@ -248,6 +249,7 @@
                         console.log(response, 'project');
                         this.image = ''
                         this.fetchService()
+                        this.editCatalogue = false
                     } catch (err) {
                         console.log(err);
                     }  
