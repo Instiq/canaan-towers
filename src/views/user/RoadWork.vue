@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -29,17 +30,26 @@ export default {
         rightPicture: 'road-work-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'road-work-slide-1.png',
-          'road-work-slide-2.png'
-        ]
+        picture: [ ]
       },
       relatedProjects: {
         picture: [
-          'road-work-1', 'road-work-2', 'road-work-3', 'road-work-4', 'road-work-5'
+          'road-work-1.png', 'road-work-2.png', 'road-work-3.png', 'road-work-4.png', 'road-work-5.png'
         ]
       }
     }
+  },
+    async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/road/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

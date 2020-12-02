@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -32,30 +33,27 @@ export default {
         rightPicture: 'automobile-sales-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'automobile-sales-main-carousel-1.jpg',
-          'automobile-sales-main-carousel-2.jpg'
-        ]
+        picture: [ ]
       },
       relatedProjects: {
         picture: [
-          'automobile-sales-1', 'automobile-sales-2', 'automobile-sales-3', 'automobile-sales-4', 'automobile-sales-5'
+          'automobile-sales-1.png', 'automobile-sales-2.png', 'automobile-sales-3.jpg', 'automobile-sales-4.png', 'automobile-sales-5.png'
         ]
       },
       catalogueData: {
         images: [
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4',
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4',
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4'
+          'automobile-sales-catalogue-1.png',
+          'automobile-sales-catalogue-2.png',
+          'automobile-sales-catalogue-3.png',
+          'automobile-sales-catalogue-4.png',
+          'automobile-sales-catalogue-1.png',
+          'automobile-sales-catalogue-2.png',
+          'automobile-sales-catalogue-3.png',
+          'automobile-sales-catalogue-4.png',
+          'automobile-sales-catalogue-1.png',
+          'automobile-sales-catalogue-2.png',
+          'automobile-sales-catalogue-3.png',
+          'automobile-sales-catalogue-4.png'
         ],
         title: [
           'Mercedez Benz E420',
@@ -73,6 +71,18 @@ export default {
         ]
       }
     }
+  },
+    async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/automobile/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,
