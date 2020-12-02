@@ -220,7 +220,7 @@ export default {
 .header-first__content--left {
   color: #fff;
   text-align: left;
-  padding-top: 15rem;
+  padding-top: 20rem;
 }
 
 .header-first--primary-text {

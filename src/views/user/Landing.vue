@@ -16,8 +16,8 @@ export default {
   data () {
     return {
       headerMain: {
-        leftHeader: 'The Best Place For All You Need...',
-        leftText: 'Simplifying the complexities of human desires is our specialty. We are for you.'
+        leftHeader: 'The Promise Land of Exceptional Services',
+        leftText: ''
       }
     }
   },

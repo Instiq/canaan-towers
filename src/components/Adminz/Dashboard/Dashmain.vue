@@ -36,7 +36,7 @@
                 <Chart/>
             </div>
             <div class="chart">
-                <Chart/>
+                <DChart/>
             </div>
         </div>
     </div>
@@ -45,11 +45,14 @@
 <script>
 import Navbar from '@/components/Adminz/Dashboard/Navbar'
 import Chart from '@/components/Adminz/Dashboard/Chart/Chart'
+import DChart from '@/components/Adminz/Dashboard/Chart/Doughnut'
+
 export default {
   name: 'Dashmain',
   components: {
     Navbar,
-    Chart
+    Chart,
+    DChart
   }
 }
 </script>
