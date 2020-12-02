@@ -31,7 +31,9 @@
                     <p><input type="file" @change="fileSelected"></p>
                 </div>
                 <div class="upload--1 flex--3">
-                    <p class="upload--2">Display image</p>
+                    <h1 v-if='previewer === false' class="upload--2">Image Preview</h1>
+                    <p v-if='previewer' class="upload--2"><img :src='preview' alt='Preview Image' class="preview"/></p>
+                    
                     <button  type='submit'>Add +</button>
                 </div>
             </form>
@@ -63,7 +65,8 @@
                         <div class="image">
                             Upload image
                         </div>
-                        <p><input type="file" @change="fileSelected"></p>                        <button>Create</button>
+                        <p><input type="file" @change="fileSelected"></p>
+                        <button>Create</button>
                     </div>
                 </div>
             </form>
@@ -96,6 +99,8 @@ export default {
         services: 'Building Construction',
         serviceCategory: 'carousel',
         image: '',
+        preview: null,
+        previewer: false,
         catalogue: {
             item: '',
             price: '',
@@ -114,6 +119,8 @@ export default {
     },
     fileSelected(event){
         this.image = event.target.files[0]
+        this.preview = URL.createObjectURL(event.target.files[0])
+        this.previewer = true
         console.log(this.image)
     },
     async postService() {
@@ -324,6 +331,28 @@ export default {
                             text-align: center;
                             margin-left: auto
                         }
+
+                        p {
+                            padding: .5rem;
+                        }
+
+                        p {
+                            text-decoration: underline;
+                            color: #E36F1A;
+                            font: normal normal normal 14px/21px Poppins;
+                            letter-spacing: 0px;
+                            cursor: pointer
+                        }
+
+                        .preview {
+                            width: 100%;
+                            max-width: 300px;
+                        }
+
+                        h1 {
+                            border: 2px dashed grey;
+                            font: normal normal 600 16px/30px Poppins;
+                        }
                     }
 
                     &--2 {
@@ -332,13 +361,9 @@ export default {
                         width: 100%;
                     }
                 }
-
-                p {
-                    text-decoration: underline;
-                    font: normal normal normal 14px/21px Poppins;
-                    letter-spacing: 0px;
-                    color: #CC5722;
-                    cursor: pointer
+                
+                .upload--2 {
+                    border: none;
                 }
             }
 
@@ -392,9 +417,9 @@ export default {
                     letter-spacing: 0px;
                     color: #ACACAC;
                     opacity: 1;
-                    border: 0.5px solid #707070;
                     border-radius: 5px;
                     padding: 0 1rem;
+                    border: 2px solid;
                 }
 
                 .input--12 {
@@ -454,7 +479,6 @@ export default {
                     letter-spacing: 0px;
                     color: #545454;
                     opacity: 1;
-                    border: 0.5px solid #707070;
                     border-radius: 5px;
                     padding: 0 1rem;
                     height: 70px;

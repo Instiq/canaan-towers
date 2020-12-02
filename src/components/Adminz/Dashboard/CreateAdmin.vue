@@ -62,7 +62,7 @@
                 };
                 
                 let name = toTitleCase(this.form.name)
-
+ 
                 const formData = new FormData()
                 formData.append('image', this.image)
                 formData.append('name', name)

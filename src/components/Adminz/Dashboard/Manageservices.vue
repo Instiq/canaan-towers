@@ -32,7 +32,7 @@
                     <h1>Delete this carousel !</h1>
                     <div class="button flex--2">
                         <button @click='confirm = false'>Cancel</button>
-                        <button @click='confirm = false; deleteCarousel()'>Delete</button>
+                        <button @click='confirm = false; deleteService()'>Delete</button>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                             <div class="img-container">
                                 <img :src="image.carousel" alt='carousel'/>
                             </div>
-                            <p @click='confirm = true; selectedCarousel(image)'>Delete</p>
+                            <p @click='confirm = true; deleteMain(image)'>Delete</p>
                         </div>
                     </div>
                 </div>
@@ -54,12 +54,12 @@
                         <img :src="catalogue.image" alt='carousel'/>
                         <div class="flex--2 button">
                             <button @click='editCatalogue = true; selectCatalogue(catalogue)'>Edit</button>
-                            <button>Delete</button>
+                            <button @click='confirm = true; deleteMain(catalogue)'>Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="edit"  v-if='editCatalogue'>
-                    <div class="flex--2 edit-container">
+                    <form @submit.prevent="updateService" class="flex--2 edit-container">
                         <span @click='editCatalogue = false'>x</span>
                         <div class="flex--3 input-main">
                             <div class="flex--2 input--12">
@@ -81,7 +81,7 @@
                                     <label>Specification</label>
                                     <input placeholder="" v-model="singleCatalogue.specification"/>
                                 </div>
-                                <button>Save Changes</button>
+                                <button type='submit'>Save Changes</button>
                             </div>
                         </div>
                         <div class="input--3">
@@ -89,10 +89,10 @@
                                 <div class="image">
                                     <img :src='singleCatalogue.image' alt=''/>
                                 </div>
-                                <p>Update image</p>
+                                <p><input type="file" @change="fileSelected"></p>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </section>
             <section class='sub-section--3 flex--1'  v-else-if="show === 'project'">
@@ -101,25 +101,25 @@
                         <img :src="project.image" alt='project'/>
                         <div class="flex--2 button">
                             <button @click='editProject = true; selectProject(project)'>Edit</button>
-                            <button>Delete</button>
+                            <button @click='confirm = true; deleteMain(project)'>Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class='input-container flex--2' v-if='editProject'>
-                    <div class="flex--2 input-main">
-                        <span @click='editProject = false'>x</span>
+                    <form @submit.prevent="updateService" class="flex--2 input-main">
+                        <span @click='editProject = false'>&times;</span>
                         <div class="flex--3 input--1">
                             <input placeholder="Title" v-model="singleProject.title"/>
                             <input placeholder="Description" v-model="singleProject.description"/>
-                            <button>Save Changes</button>
+                            <button type='submit'>Save Changes</button>
                         </div>
                         <div class="upload-container flex--3">
                             <div class="image">
                                 <img :src='singleProject.image' alt='project'/>
                             </div>
-                            <p>Browse</p>
+                            <p><input type="file" @change="fileSelected"></p>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </section>
         </main>
@@ -138,7 +138,7 @@
                 editProject: false,
                 items: [],
                 carousels: [],
-                singleCarousel: {},
+                deleter: {},
                 catalogues: [],
                 singleCatalogue: {},
                 projects: [],
@@ -164,8 +164,8 @@
             }  
         },
         methods: {
-            selectedCarousel(carousel) {
-                this.singleCarousel = carousel;
+            deleteMain(service) {
+                this.deleter = service;
             },
             selectCatalogue(catalogue) {
                 this.singleCatalogue = catalogue;
@@ -174,23 +174,83 @@
                 this.singleProject = project;
                 console.log('why',this.singleProject)
             },
-            async deleteCarousel() {
-                let id = this.singleCarousel._id;
+            fileSelected(event){
+                this.image = event.target.files[0]
+                this.singleProject.image = URL.createObjectURL(event.target.files[0])
+                console.log(this.image)
+            },
+            async deleteService() {
+                let id = this.deleter._id;
                 let admin= JSON.parse(localStorage.getItem('admin'))
                 let Authorized = admin && admin.token
                 try {
                     console.log(id, Authorized, '1234')
-                    const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/building/carousel/${id}`, {
+                    const request = await axios.delete(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}/${id}`, {
                         headers: {
                             'Accept': 'application/json',
-                            'Authorization': `Bearer ${Authorized}`,
-                            'Content-Type': 'application/x-www-form-urlencoded'
+                            'Authorization': `Bearer ${Authorized}`
                         }
                     });
                     console.log('request', request.data)
                     this.fetchService()
                 } catch (err) {
                     console.log(err);
+                }
+            },
+            async updateService() {
+                let admin= JSON.parse(localStorage.getItem('admin'))
+                let Authorize = admin && admin.token
+                if (this.serviceCategory === 'slider') {
+                    let id = this.singleProject._id;
+                    const formData = new FormData()
+                    formData.append('image', this.image)
+                    formData.append('title',  this.singleProject.title)
+                    formData.append('description', this.singleProject.description)
+                    console.log('it gotnher', formData)
+                    let headers =  {
+                        Authorization: `Bearer ${Authorize}`
+                    }
+                    const requestOptions = {
+                        method: 'PATCH',
+                        headers,
+                        body: formData
+                    }
+                    try {
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}/${id}`, requestOptions);
+                        const response = await request.json();
+                        console.log(response, 'project');
+                        this.image = ''
+                        this.fetchService()
+                    } catch (err) {
+                        console.log(err);
+                    }  
+                }
+                if (this.serviceCategory === 'catalogue') {
+                    let id = this.singleCatalogue._id;
+                    const formData = new FormData()
+                    formData.append('image', this.image)
+                    formData.append('item',  this.singleCatalogue.item)
+                    formData.append('price',  this.singleCatalogue.price)
+                    formData.append('description', this.singleCatalogue.description)
+                    formData.append('specification',  this.singleCatalogue.specification)
+                    console.log('it gotnher', formData)
+                    let headers =  {
+                        Authorization: `Bearer ${Authorize}`
+                    }
+                    const requestOptions = {
+                        method: 'PATCH',
+                        headers,
+                        body: formData
+                    }
+                    try {
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}/${id}`, requestOptions);
+                        const response = await request.json();
+                        console.log(response, 'project');
+                        this.image = ''
+                        this.fetchService()
+                    } catch (err) {
+                        console.log(err);
+                    }  
                 }
             },
             async fetchService() {
@@ -449,7 +509,6 @@
 
             %span {
                 position: absolute;
-                font: normal normal 500 16px/20px Poppins;
                 right: 2rem;
                 top: 1.5rem;
                 padding: 2px 7px 5px;
@@ -539,7 +598,6 @@
                     letter-spacing: 0px;
                     color: black;
                     opacity: 1;
-                    border: 0.5px solid #707070;
                     border-radius: 5px;
                     padding: 0 1rem;
                 }
@@ -655,7 +713,6 @@
                     letter-spacing: 0px;
                     color: #0C0500;
                     opacity: 1;
-                    border: 0.5px solid #707070;
                     border-radius: 5px;
                     padding: 0 1rem;
                     height: 70px;
