@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -32,10 +33,7 @@ export default {
         rightPicture: 'roofing-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'roofing-main-carousel-1.jpg',
-          'roofing-main-carousel-2.png'
-        ],
+        picture: [],
         header: [
           'product-type',
           'product-type'
@@ -47,23 +45,23 @@ export default {
       },
       relatedProjects: {
         picture: [
-          'roofing-1', 'roofing-2', 'roofing-3', 'roofing-4', 'roofing-5'
+          'roofing-1.png', 'roofing-2.png', 'roofing-3.png', 'roofing-4.png', 'roofing-5.png'
         ]
       },
       catalogueData: {
         images: [
-          'roofing-1',
-          'roofing-2',
-          'roofing-3',
-          'roofing-4',
-          'roofing-3',
-          'roofing-4',
-          'roofing-2',
-          'roofing-1',
-          'roofing-2',
-          'roofing-3',
-          'roofing-1',
-          'roofing-4'
+          'roofing-1.png',
+          'roofing-2.png',
+          'roofing-3.png',
+          'roofing-4.png',
+          'roofing-3.png',
+          'roofing-4.png',
+          'roofing-2.png',
+          'roofing-1.png',
+          'roofing-2.png',
+          'roofing-3.png',
+          'roofing-1.png',
+          'roofing-4.png'
         ],
         title: [
           'Aluminium Roofing Sheet',
@@ -81,6 +79,18 @@ export default {
         ]
       }
     }
+  },
+    async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/roof/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,
