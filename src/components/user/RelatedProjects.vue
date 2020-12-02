@@ -7,7 +7,7 @@
           <p class="text">Austin Opara Estate</p>
           <router-link to="/road-work-single">
             <img
-              :src="getImgUrl(image)"
+              :src="image"
             />
           </router-link>
           <b-button class="button" to="/road-work-single">View</b-button>

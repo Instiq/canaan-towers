@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -29,17 +30,24 @@ export default {
         rightPicture: 'interior-furnishing-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'building-construction-main-carousel-1.jpg',
-          'building-construction-main-carousel-2.jpg'
-        ]
+        picture: []
       },
       relatedProjects: {
-        picture: [
-          'building-construction-1', 'building-construction-2', 'building-construction-3', 'building-construction-4', 'building-construction-5'
-        ]
+        picture: []
       }
     }
+  },
+  async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/building/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

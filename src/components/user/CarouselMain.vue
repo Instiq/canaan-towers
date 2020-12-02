@@ -8,7 +8,7 @@
       indicators
     >
       <!-- Slides with custom text -->
-      <b-carousel-slide :img-src="getImgUrl(val)" v-for="(val, index) in mainCarousel.picture" :key=index
+      <b-carousel-slide :img-src="val.carousel" v-for="(val, index) in mainCarousel.picture" :key=index
         class="image">
       </b-carousel-slide>
       <figcaption class="carousel-text text-right">
