@@ -147,7 +147,7 @@
                 serviceCategory: 'carousel',
                 service: 'building',
                 services: 'Building Construction',
-                toggle: true
+                toggle: true,
             }
         },
         components: { 
