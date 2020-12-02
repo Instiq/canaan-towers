@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -32,30 +33,32 @@ export default {
         rightPicture: 'alternative-power-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'alternative-power-main-carousel-1.jpg',
-          'alternative-power-main-carousel-2.png'
-        ]
+        picture: []
       },
       relatedProjects: {
         picture: [
-          'alternative-power-1', 'alternative-power-2', 'alternative-power-3', 'alternative-power-4', 'alternative-power-5'
+          'alternative-power-1.png',
+          'alternative-power-2.png',
+          'alternative-power-3.png',
+          'alternative-power-4.png',
+          'alternative-power-5.png'
+
         ]
       },
       catalogueData: {
         images: [
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1'
+          'alternative-power-catalogue-1.png',
+          'alternative-power-catalogue-2.png',
+          'alternative-power-catalogue-3.jpg',
+          'alternative-power-catalogue-2.png',
+          'alternative-power-catalogue-1.png',
+          'alternative-power-catalogue-3.jpg',
+          'alternative-power-catalogue-2.png',
+          'alternative-power-catalogue-2.png',
+          'alternative-power-catalogue-1.png',
+          'alternative-power-catalogue-3.jpg',
+          'alternative-power-catalogue-2.png',
+          'alternative-power-catalogue-1.png'
         ],
         title: [
           'White Balustrade',
@@ -73,6 +76,18 @@ export default {
         ]
       }
     }
+  },
+  async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/power/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

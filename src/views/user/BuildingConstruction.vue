@@ -33,7 +33,13 @@ export default {
         picture: []
       },
       relatedProjects: {
-        picture: []
+        picture: [
+          'building-construction-1.png',
+          'building-construction-2.png',
+          'building-construction-3.png',
+          'building-construction-4.png',
+          'building-construction-5.png'
+        ]
       }
     }
   },

@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -32,30 +33,27 @@ export default {
         rightPicture: 'interior-furnishing-main-pic'
       },
       mainCarousel: {
-        picture: [
-          'interior-furnishing-main-carousel-1.jpg',
-          'interior-furnishing-main-carousel-2.jpg'
-        ]
+        picture: []
       },
       relatedProjects: {
         picture: [
-          'interior-furnishing-1', 'interior-furnishing-2', 'interior-furnishing-3', 'interior-furnishing-4', 'interior-furnishing-5'
+          'interior-furnishing-1.png', 'interior-furnishing-2.png', 'interior-furnishing-3.png', 'interior-furnishing-4.png', 'interior-furnishing-5.png'
         ]
       },
       catalogueData: {
         images: [
-          'interior-furnishing-catalogue-1',
-          'interior-furnishing-catalogue-2',
-          'interior-furnishing-catalogue-3',
-          'interior-furnishing-catalogue-5',
-          'interior-furnishing-catalogue-5',
-          'interior-furnishing-catalogue-6',
-          'interior-furnishing-catalogue-7',
-          'interior-furnishing-catalogue-8',
-          'interior-furnishing-catalogue-9',
-          'interior-furnishing-catalogue-10',
-          'interior-furnishing-catalogue-11',
-          'interior-furnishing-catalogue-1'
+          'interior-furnishing-catalogue-1.png',
+          'interior-furnishing-catalogue-2.png',
+          'interior-furnishing-catalogue-3.png',
+          'interior-furnishing-catalogue-5.png',
+          'interior-furnishing-catalogue-5.png',
+          'interior-furnishing-catalogue-6.png',
+          'interior-furnishing-catalogue-7.png',
+          'interior-furnishing-catalogue-8.png',
+          'interior-furnishing-catalogue-9.png',
+          'interior-furnishing-catalogue-10.png',
+          'interior-furnishing-catalogue-11.png',
+          'interior-furnishing-catalogue-1.png'
         ],
         title: [
           'Inverter 2.5KVA',
@@ -73,6 +71,18 @@ export default {
         ]
       }
     }
+  },
+    async created () {
+    try {
+        const request = await axios.get('https://canaan-towers-api.herokuapp.com/furnish/carousel');
+        const response = request.data;
+        console.log('building', response)
+        for (let i = 0; i < response.length; i++) {
+          this.mainCarousel.picture.push(response[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,
