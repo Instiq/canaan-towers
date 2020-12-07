@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(admin, index) in admins" :key="admin._id">
-                        <th scope="row">{{ index + 1}}</th>
+                        <th scope="row">{{ index + 1 }}</th>
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>{{ admin.number }}</td>
@@ -119,9 +119,10 @@
                         Authorization: `Bearer ${Authorize}`,
                 }
                     try {
-                        const request = await fetch('https://canaan-towers-api.herokuapp.com/admins', { headers });
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/admins?page=${pageNumber}`, { headers });
                         const response = await request.json();
-                        this.admins = response;
+                        console.log('responseresponse', response)
+                        this.admins = response.data.admin;
                         this.loading = false;
                     } catch (err) {
                         console.log(err);

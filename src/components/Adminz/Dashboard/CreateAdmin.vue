@@ -15,7 +15,7 @@
                     </div>
                     <p><input type="file" @change="fileSelected"></p>
                 </div>
-            </div>
+            </div> 
             <button type='submit'>Create</button>
         </form>
     </div>

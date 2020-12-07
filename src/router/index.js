@@ -9,6 +9,7 @@ import Quotes from '../components/Adminz/Dashboard/Quotes'
 import Updateservices from '../components/Adminz/Dashboard/Updateservices'
 import Manageservices from '../components/Adminz/Dashboard/Manageservices'
 import AdminManagement from '../components/Adminz/Dashboard/AdminManagement'
+import Paystack from '../views/Paystack'
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: () => import('../views/user/Checkout.vue')
+  },
+  {
+    path: '/paystack',
+    name: 'Paystack',
+    component: Paystack
   },
   {
     path: '/admin',
