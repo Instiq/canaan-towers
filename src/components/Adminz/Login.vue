@@ -1,6 +1,5 @@
 <template>
     <div class="dash--login flex--3">
-        
         <form class='login-form' @submit.prevent="handleSubmit">
             <h1>Welcome to Canaan Towers</h1> 
             <p>Login to continue</p>
@@ -69,7 +68,7 @@
         .login-form {
             width: 44%;
             max-width: 550px;
-            margin-left: 4rem;
+            min-width: 500px;
             z-index: 2;
             background-color: #FFFFFF;
             padding: 5rem 6rem 2rem;
@@ -127,5 +126,29 @@
             }
 
         }
+    }
+
+    @media screen and (max-width: 500px) {
+        .dash--login .login-form .loginfloat {
+            display: none;
+        }
+
+        .dash--login .login-form {
+            width: 90%;
+            max-width: auto;
+            min-width: auto; 
+            background-color: #FFFFFF;
+            padding: 5rem 3rem 2rem;
+        }
+
+        .dash--login .login-form .input-label input {
+            width: 100%;
+        }
+
+        .dash--login .login-form button {
+            width: 100%;
+        }
+
+
     }
 </style>

@@ -119,7 +119,7 @@
                         Authorization: `Bearer ${Authorize}`,
                 }
                     try {
-                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/admins?page=${pageNumber}`, { headers });
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/admins`, { headers });
                         const response = await request.json();
                         console.log('responseresponse', response)
                         this.admins = response.data.admin;
