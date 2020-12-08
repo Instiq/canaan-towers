@@ -1,5 +1,8 @@
 <template>
     <div class="dash--login flex--3">
+        <div v-if="loading" class='spinnerz flex--2'>
+            <img src='@/assets/images/spinnerz.svg' alt=''/>
+        </div>
         <form class='login-form' @submit.prevent="handleSubmit">
             <h1>Welcome to Canaan Towers</h1> 
             <p>Login to continue</p>
@@ -26,11 +29,13 @@
                     email: '',
                     password: '' 
                 }, 
+                loading: false
             }
         },
         methods: {  
             async handleSubmit () {
                 let data = {...this.form}
+                this.loading = true
                 this.form = {};
                 const requestOptions = {
                     method: 'POST',
@@ -51,6 +56,8 @@
                     }
                 } catch (errors) {
                     console.log(errors);
+                } finally {
+                    this.loading = false
                 }
             }
         }

@@ -6,7 +6,7 @@
                 <font-awesome-icon :icon="['fas', 'search']" class="font"/>
                 <input placeholder="Search"/>
             </div>
-            <div v-if="loading" class='spinner flex--2'>
+            <div v-if="loading" class='spinnerz flex--2'>
                 <img src='@/assets/images/spinnerz.svg' alt=''/>
             </div>
             <table class="table">
@@ -145,16 +145,6 @@
             background: #FFFFFF 0% 0% no-repeat padding-box;
             box-shadow: 0px 3px 6px #00000029;
             padding: 4rem 7rem;
-
-            .spinner {
-                position: fixed;
-                top: 0;
-                left: 0;
-                background-color:rgba(112, 112, 112, 0.2);
-                height: 100vh;
-                width: 100vw;
-                justify-content: center;
-            }
 
             .input-search--main {
                 width: 60%;
