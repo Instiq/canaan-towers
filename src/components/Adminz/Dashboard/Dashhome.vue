@@ -52,4 +52,13 @@ console.log('Dashhome')
         width: calc(100% - 15vw);
     }
 
+    @media only screen and (max-width: 1200px) {
+          .dash--2 {
+              margin-left: 80px;
+              padding: 0 5%;
+              text-align: left;
+              width: calc(100% - 80px);
+          }
+    }
+
 </style>

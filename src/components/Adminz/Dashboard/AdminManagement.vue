@@ -34,8 +34,12 @@
                     </tr>
                 </tbody>
             </table>
-            <div>
-                pagination
+            <div class="flex--2">
+                <button class="pagination-button" :disabled="page <= 1" @click="page = page - 1; getQuotes()">Previous</button>
+                <div v-for="(number, index) of numberPages" :key='number'>
+                    <button :class="['pagination-button', page === index + 1 ? 'active' : '']" @click="page = index + 1; getQuotes()">{{index + 1 }}</button>
+                </div>
+                <button  class="pagination-button" :disabled="page >= numberPages" @click="page = page + 1; getQuotes()">Next</button>
             </div>
             <section class="flex--1 view--admin grid--1" v-if="viewAdmin">
                 <div class="admin--card flex--1">
@@ -62,7 +66,7 @@
                             </div>
                         </div>
                         <div class="flex--2">
-                            <button @click='viewAdmin = false'>Activate</button>
+                            <button @click='viewAdmin = false; activateAdmin()'>Activate</button>
                             <button  @click='viewAdmin = false; revokeAdmin()'>Disable</button>
                         </div>
                     </div>
@@ -84,7 +88,15 @@
                 admins: '',
                 loading: true,
                 singleAdmin: '',
-                viewAdmin: false
+                viewAdmin: false,
+                page: 1,
+                totalItem: '',
+                perPage: 10,
+            }
+        },
+        computed: {
+            numberPages() {
+                return Math.ceil( this.totalItem / this.perPage)
             }
         },
         methods: {
@@ -92,6 +104,7 @@
                 this.singleAdmin = admin
             },
             async revokeAdmin() {
+                    this.loading = true;
                     let admin= JSON.parse(localStorage.getItem('admin'))
                     let Authorize = admin && admin.token
                     let headers =  {
@@ -109,7 +122,32 @@
                         this.getAdmin()
                     } catch (err) {
                         console.log(err);
-                    }  
+                    } finally {
+                        this.loading = false;
+                    }
+            },
+            async activateAdmin() {
+                    this.loading = true;
+                    let admin= JSON.parse(localStorage.getItem('admin'))
+                    let Authorize = admin && admin.token
+                    let headers =  {
+                        Authorization: `Bearer ${Authorize}`
+                    }
+                    let id = this.singleAdmin._id;
+                    const requestOptions = {
+                        method: 'PATCH',
+                        headers
+                    }
+                    try {
+                        const request = await fetch(`https://canaan-towers-api.herokuapp.com/admin/active/${id}`, requestOptions);
+                        const response = await request.json();
+                        console.log(response);
+                        this.getAdmin()
+                    } catch (err) {
+                        console.log(err);
+                    } finally {
+                        this.loading = false;
+                    }
             },
             async getAdmin () {
                 let admin= JSON.parse(localStorage.getItem('admin'))
@@ -123,11 +161,13 @@
                         const response = await request.json();
                         console.log('responseresponse', response)
                         this.admins = response.data.admin;
-                        this.loading = false;
+                        this.totalItem = response.data.count
+
                     } catch (err) {
                         console.log(err);
+                    }  finally {
                         this.loading = false;
-                } 
+                    }
             }
         },
         async created () { 
@@ -199,6 +239,26 @@
             .disabled {
                 td {
                     background: #243141;
+                }
+            }
+
+            .pagination-button {
+                border-radius: 5px;
+                padding: 5px 10px;
+                border: 2px solid #b3b2b2;
+                background-color: #ebe9e9;
+                margin-right: 10px;
+                cursor: pointer;
+                
+
+                &.active {
+                    border: 2px solid #b3b2b2;
+                    background-color: #ffffff;
+                    cursor: auto;
+                }
+
+                &:disabled {
+                    cursor: auto;
                 }
             }
 

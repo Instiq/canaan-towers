@@ -16,7 +16,6 @@
             </div>
             <button type="submit">LOGIN</button>
             <img src="../../assets/images/loginfloat.svg" class="loginfloat"/>
-            <p class="forgot">Reset password?</p>
         </form>
     </div>
 </template>
@@ -113,17 +112,6 @@
                 font: normal normal 900 15px/20px Avenir;
                 letter-spacing: 0px;
                 color: #FFFFFF;
-            }
-
-            .forgot {
-                text-align: center;
-                text-decoration: underline;
-                font: normal normal normal 17px/23px Avenir;
-                letter-spacing: 0px;
-                color: #646464;
-                padding-top: 1rem;
-                width: 90%;
-                cursor: pointer;
             }
 
             .loginfloat {

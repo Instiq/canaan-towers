@@ -6,6 +6,9 @@
                 <font-awesome-icon :icon="['fas', 'search']" class="font"/>
                 <input placeholder="Search"/>
             </div> 
+            <div v-if="loading" class='spinnerz flex--2'>
+                <img src='@/assets/images/spinnerz.svg' alt=''/>
+            </div>
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -40,12 +43,13 @@
 <script>
 import Navbar from '@/components/Adminz/Dashboard/Navbar'
 export default {
-  components: {
+  components: { 
     Navbar
   },
   data () {
     return {
         quotes: '',
+        loading: true,
         page: 1,
         totalItem: '',
         perPage: 10,
@@ -56,6 +60,7 @@ export default {
   },
   methods: {
     async getQuotes() {
+        this.loading = true;
         let admin= JSON.parse(localStorage.getItem('admin'))
         let Authorize = admin && admin.token
         let headers =  {
@@ -71,6 +76,8 @@ export default {
         console.log(this.totalItem)
         } catch (err) {
         console.log(err)
+        } finally {
+            this.loading = false;
         }
     }   
   },
@@ -135,6 +142,7 @@ export default {
             }
 
             .pagination-button {
+                margin-top: 1rem;
                 border-radius: 5px;
                 padding: 5px 10px;
                 border: 2px solid #b3b2b2;
