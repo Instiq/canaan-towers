@@ -2,7 +2,7 @@
     <div class="sidebar" :class="{ toggle: toggler }">
         <img src='@/assets/images/Logo-1.png'/>
         <div class="link-container">
-            <div class="sidebar-link flex--3">
+            <div class="sidebar-link flex--3"> 
                 <router-link to='/admin/dashboard' exact class="flex--2 link--height">
                     <p>Dashboard</p>
                     <font-awesome-icon :icon="['fas', 'th-large']" class="font"/>
@@ -131,8 +131,7 @@ export default {
     }
     
     .toggle {
-      margin-left: -220px;
-      z-index: 1000;
+      margin-left: -700px;
     }
 
     @media only screen and (min-width: 500px) and (max-width: 700px) {
@@ -165,18 +164,25 @@ export default {
             }
     }
 
-    //  @media only screen and (max-width: 500px) {
-    //      .sidebar-link p {
-    //         display: inline;
-    //     }
+     @media only screen and (max-width: 499px) {
+        .sidebar {
+            width: 100%;
 
-    //     .sidebar {
-    //         width: 200px;
-    //     }
+            .sidebar-link a.router-link-active::before {
+                content: "";
+                display: none;
+            }
 
-    //     .sidebar-link .flex--2 .font {
-    //         width: 20px;
-    //         margin-left: 5px;
-    //     }
-    //  }
+            img {
+                display: none;
+            }
+
+            .link-container {
+                .flex--3 {
+                    align-items: center;
+                }
+            }
+
+        }
+     }
 </style>

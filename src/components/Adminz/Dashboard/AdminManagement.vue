@@ -29,12 +29,12 @@
                         <td>{{ admin.number }}</td>
                         <td>{{ admin.number }}</td>
                         <div class="status" v-if="admin.active"><td>Active</td></div>
-                        <div class="status disabled" v-if="admin.active === false"><td>Disabled</td></div>
+                        <div class="status disabled" v-else><td>Disabled</td></div>
                         <td><div class="view-admin" @click='selectedAdmin(admin); viewAdmin = true'><font-awesome-icon :icon="['fas', 'eye']" class="font"/></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div class="flex--2">
+            <div class="flex--2">  
                 <button class="pagination-button" :disabled="page <= 1" @click="page = page - 1; getQuotes()">Previous</button>
                 <div v-for="(number, index) of numberPages" :key='number'>
                     <button :class="['pagination-button', page === index + 1 ? 'active' : '']" @click="page = index + 1; getQuotes()">{{index + 1 }}</button>
@@ -43,9 +43,6 @@
             </div>
             <section class="flex--1 view--admin grid--1" v-if="viewAdmin">
                 <div class="admin--card flex--1">
-                   
-                        <img alt='sdf' :src="singleAdmin.image"/>
-                  
                     <div class='flex--3 details--button'>
                         <div class="flex--2 admin-details">
                             <div class="flex--3">
@@ -303,21 +300,6 @@
                         letter-spacing: 0px;
                         color: #0C0500;
                     }
-
-                    img {
-                        flex: 0 0 20%;
-                        width: 100%;
-                        width: 30px;
-                        border-radius: 50%;
-                        margin-right: 3rem;
-                        
-                    }
-
-                    // .img--container {
-                    //     border-radius: 50%;
-                    //     width: 100px;
-                    //     border: 2px solid red;
-                    // }
                 }
 
                 .details--button {
