@@ -1,6 +1,9 @@
 <template>
     <div class='create'>
         <Navbar heading='Create Admin'/>
+        <div v-if="loading" class='spinnerz flex--2'>
+            <img src='@/assets/images/spinnerz.svg' alt=''/>
+        </div>
         <form @submit.prevent="upload" class="section--1 flex--3">
             <div class="flex--1">
                 <div class="input--mainz flex--1">
@@ -8,12 +11,6 @@
                     <input placeholder="Email" v-model='form.email'/>
                     <input placeholder="Phone Number" v-model='form.number'/>
                     <input placeholder="First Time Password" v-model='form.password'/>
-                </div>
-                <div class="upload-container flex--3">
-                    <div class="image">
-                        Upload image 
-                    </div>
-                    <p><input type="file" @change="fileSelected"></p>
                 </div>
             </div> 
             <button type='submit'>Create</button>
@@ -35,7 +32,8 @@
                     number: '',
                     password: ''
                 },
-                image: null
+                image: null,
+                loading: false,
             }
         },
         methods: {
@@ -44,11 +42,13 @@
                 console.log(this.image)
             },
             async upload() {
+                this.loading = true
                 console.log('omo', this.form.name)
                 let admin= JSON.parse(localStorage.getItem('admin'))
                 let Authorize = admin && admin.token
                 let headers =  {
-                    Authorization: `Bearer ${Authorize}`
+                    Authorization: `Bearer ${Authorize}`,
+                    'Content-Type': 'application/json'
                 }
                 console.log(Authorize, 'Authorize', headers)
  
@@ -60,26 +60,25 @@
                     }
                     return str.join(' ');
                 };
-                
+
                 let name = toTitleCase(this.form.name)
- 
-                const formData = new FormData()
-                formData.append('image', this.image)
-                formData.append('name', name)
-                formData.append('email', this.form.email)
-                formData.append('number', this.form.number)
-                formData.append('password', this.form.password)
-                console.log('boyoboy', formData, this.form)
+
+                let data = {...this.form, name}
+                console.log(data, 'datadata')
                 const requestOptions = {
                     method: 'POST',
                     headers,
-                    body: formData
+                    body: JSON.stringify(data)
                 }
                 try {
                     const request = await fetch('https://canaan-towers-api.herokuapp.com/admin/create', requestOptions);
                     const response = await request.json();
+                    this.form = ''
+                    console.log(response)
                 } catch (err) {
                     console.log(err);
+                } finally {
+                    this.loading = false
                 }  
 
             }
@@ -101,14 +100,10 @@
             box-shadow: 0px 3px 6px #00000029;
             border-radius: 8px;
 
-            .flex--1 {
-                justify-content: space-between;
-            }
-
              .input--mainz {
-                width: 60%;
+                width: 100%;
                 flex-wrap: wrap;
-                gap: 2rem 3rem;
+                gap: 3rem 3rem;
 
                 input {
                     width: 45%;
@@ -122,33 +117,13 @@
             }
 
             button {
-                width: 18%;
-                margin-top: 2rem;
+                width: 120px;
+                margin-top: 3rem;
                 height: 43px;
                 border-radius: 4px;
                 background: #E36F1A 0% 0% no-repeat padding-box;
                 box-shadow: 0px 4px 12px #F06F3866;
                 color: white;
-            }
-
-            .upload-container {
-                align-items: center;
-
-                .image {
-                    border: 2px dashed grey;
-                    padding: 6rem;
-                    border-radius: 4px;
-                    margin-bottom: 2rem
-                }
-
-                p {
-                    text-decoration: underline;
-                    font: normal normal normal 14px/21px Poppins;
-                    letter-spacing: 0px;
-                    color: #CC5722;
-                    cursor: pointer
-                }
-
             }
 
         }

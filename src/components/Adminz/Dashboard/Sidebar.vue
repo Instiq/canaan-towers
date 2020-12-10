@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" :class="{ toggle: toggler }">
         <img src='@/assets/images/Logo-1.png'/>
         <div class="link-container">
             <div class="sidebar-link flex--3">
@@ -17,7 +17,7 @@
                 </router-link>
                 <router-link to='/admin/dashboard/quotes' class="flex--2 link--height">
                     <p>Quotes</p>
-                    <font-awesome-icon :icon="['fas', 'columns']" class="font"/>
+                    <font-awesome-icon :icon="['fas', 'th-list']" class="font"/>
                 </router-link>
                 <router-link to='/admin/dashboard/updateservice' class="flex--2 link--height">
                     <p>Update services</p>
@@ -27,6 +27,14 @@
                     <p>Manage services</p>
                     <font-awesome-icon :icon="['fas', 'eye']" class="font"/>
                 </router-link>
+                <router-link to='/admin/dashboard/settings' class="flex--2 link--height">
+                    <p>Settings</p>
+                    <font-awesome-icon :icon="['fas', 'user-cog']" class="font"/>
+                </router-link>
+                <router-link to='/admin' exact class="flex--2 link--height">
+                    <p>Logout</p>
+                    <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="font"/>
+                </router-link>
             </div> 
         </div>
     </div>
@@ -34,7 +42,7 @@
 
 <script>
 export default {
-
+    props: ['toggler']
 }
 </script>
 
@@ -42,13 +50,14 @@ export default {
     .sidebar {
         position: fixed;
         height: 100vh;
-        width: 15vw;
+        width: 220px;
         background-color: rgb(255, 255, 255);
         box-shadow: 0 10px 5px 1px rgb(150, 146, 146);
         padding-top: 2rem;
+        z-index: 10;
         top: 0;
-        bottom: 0;
         left: 0;
+        transition: margin .3s ease-in;
 
         img {
             width: 130px;
@@ -65,7 +74,7 @@ export default {
 
         &-link {
             width: 100%;
-            padding-left: 2vw;
+            padding-left: 26px;
             position: relative;
 
             .flex--2 {
@@ -76,7 +85,6 @@ export default {
                     width: 18px;
                     height: auto;
                     margin-right: 1rem;
-                    fill: #ACACAC;
                     color: #ACACAC;
                     font-size: 100px;
                 }
@@ -95,7 +103,7 @@ export default {
                 padding: 1rem 0;
                 text-align: left;
                 margin-top: 1rem;
-                font: normal normal 500 12px/21px Poppins;
+                font: normal normal 500 14px/21px Poppins;
             }
 
             a.router-link-active {
@@ -121,8 +129,13 @@ export default {
 
         }
     }
+    
+    .toggle {
+      margin-left: -220px;
+      z-index: 1000;
+    }
 
-    @media only screen and (max-width: 1200px) {
+    @media only screen and (min-width: 500px) and (max-width: 700px) {
         .sidebar-link p {
             display: none;
         }
@@ -135,7 +148,6 @@ export default {
 
         .sidebar-link {
             width: 100%;
-            padding-left: 20px;
             position: relative;
         }
 
@@ -152,4 +164,19 @@ export default {
                 height: 32px;
             }
     }
+
+    //  @media only screen and (max-width: 500px) {
+    //      .sidebar-link p {
+    //         display: inline;
+    //     }
+
+    //     .sidebar {
+    //         width: 200px;
+    //     }
+
+    //     .sidebar-link .flex--2 .font {
+    //         width: 20px;
+    //         margin-left: 5px;
+    //     }
+    //  }
 </style>

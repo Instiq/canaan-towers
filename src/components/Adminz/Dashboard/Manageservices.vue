@@ -196,7 +196,7 @@
                 } catch (err) {
                     console.log(err);
                 }
-            },
+            }, 
             async updateService() {
                 let admin= JSON.parse(localStorage.getItem('admin'))
                 let Authorize = admin && admin.token

@@ -1,6 +1,9 @@
 <template>
     <div class="flex">
-        <Sidebar/>
+        <div class="hamburger" @click='toggleSidebar = !toggleSidebar'> 
+          <font-awesome-icon :icon="['fas', 'align-justify']" class="font"/>
+        </div>
+        <Sidebar :toggler='toggleSidebar'/>
         <div class="dash--2">
             <router-view/>
         </div>
@@ -12,6 +15,11 @@ import Sidebar from './Sidebar'
 
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      toggleSidebar: false
+    }
+  },
   components: {
     Sidebar
   },
@@ -46,19 +54,45 @@ console.log('Dashhome')
 
 <style lang="scss">
     .dash--2 {
-        margin-left:15vw;
+        margin-left: 200px;
         padding: 0 5%;
         text-align: left;
-        width: calc(100% - 15vw);
+        width: calc(100% - 200px);
+        position: relative;
+        z-index: 8;
     }
 
-    @media only screen and (max-width: 1200px) {
+    .hamburger {
+      position: fixed;
+      display: none;
+      top: 1rem;
+      right: 1rem;
+      z-index: 20;
+      padding: 1rem 1.5rem .5rem;
+      border-radius: 10px;
+      background-color: #d8d8d8;
+      cursor: pointer;
+
+      .font {
+        color: #242424;
+        font-size: 2rem;
+        transform: scaleX(1.2)
+      }
+    }
+    
+
+    @media only screen and (max-width: 700px) {
           .dash--2 {
-              margin-left: 80px;
+              margin-left: 0px;
               padding: 0 5%;
               text-align: left;
-              width: calc(100% - 80px);
+              width: calc(100% - 0px);
           }
     }
 
+    @media only screen and (max-width: 500px) {
+        .hamburger {
+          display: inline;
+        }
+    }
 </style>

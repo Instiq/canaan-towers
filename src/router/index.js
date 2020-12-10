@@ -9,6 +9,7 @@ import Quotes from '../components/Adminz/Dashboard/Quotes'
 import Updateservices from '../components/Adminz/Dashboard/Updateservices'
 import Manageservices from '../components/Adminz/Dashboard/Manageservices'
 import AdminManagement from '../components/Adminz/Dashboard/AdminManagement'
+import Settings from '../components/Adminz/Dashboard/Settings'
 import Paystack from '../views/Paystack'
 
 Vue.use(VueRouter)
@@ -131,7 +132,12 @@ const routes = [
             path: 'adminmanage',
             name: 'adminmanage',
             component: AdminManagement
-          }
+          },
+          {
+            path: 'settings',
+            name: 'settings',
+            component: Settings
+          },
         ]
 
       }

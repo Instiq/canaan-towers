@@ -34,7 +34,7 @@
         methods: {  
             async handleSubmit () {
                 let data = {...this.form}
-                this.loading = true
+                this.loading = true 
                 this.form = {};
                 const requestOptions = {
                     method: 'POST',
