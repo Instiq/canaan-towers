@@ -101,6 +101,13 @@ console.log('Dashhome')
           display: inline;
         }
 
+        .dash--2 {
+              margin-left: 0;
+              padding: 0 5%;
+              text-align: left;
+              width: 100%;
+        }
+
 
     }
 </style>
