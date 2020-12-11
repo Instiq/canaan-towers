@@ -1,6 +1,15 @@
 <template>
     <div class="dash--login flex--3">
-        
+        <div v-if="this.errormessage" class="error--message flex--2">
+            <p>Error. {{this.errormessage }}</p>
+            <span @click="errormessage = ''">&times;</span>
+        </div>
+        <div v-if="this.success === 'success'" class="error--message success flex--2">
+            <p>Success. Logging in...</p>
+        </div>
+        <div v-if="loading" class='spinnerz flex--2'>
+            <img src='@/assets/images/spinnerz.svg' alt=''/>
+        </div>
         <form class='login-form' @submit.prevent="handleSubmit">
             <h1>Welcome to Canaan Towers</h1> 
             <p>Login to continue</p>
@@ -14,7 +23,6 @@
             </div>
             <button type="submit">LOGIN</button>
             <img src="../../assets/images/loginfloat.svg" class="loginfloat"/>
-            <p class="forgot">Reset password?</p>
         </form>
     </div>
 </template>
@@ -27,11 +35,15 @@
                     email: '',
                     password: '' 
                 }, 
+                loading: false,
+                errormessage: '',
+                success: ''
             }
         },
         methods: {  
             async handleSubmit () {
                 let data = {...this.form}
+                this.loading = true 
                 this.form = {};
                 const requestOptions = {
                     method: 'POST',
@@ -48,10 +60,16 @@
                     console.log('admin', response);
                     if(response.status === 'success') {
                         console.log('e de alright')
+                        this.sucesss = response.status
                         this.$router.push('/admin/dashboard')
+                    } else {
+                        this.errormessage = response.message
+                        console.log('errormessage', this.errormessage)
                     }
-                } catch (errors) {
-                    console.log(errors);
+                } catch (error) {
+
+                } finally {
+                    this.loading = false
                 }
             }
         }
@@ -66,10 +84,34 @@
         align-items: center;
         height: 100vh;
 
+        .error--message {
+            background-color: rgba(244, 106, 106, 0.975);
+            padding: 5px 15px;
+            color: white;
+            width: 40%;
+            max-width: 550px;
+            min-width: 350px;
+            justify-content: center;
+
+            p {
+                margin: 0 1rem 0 0;
+                white-space: nowrap;
+            }
+
+            span {
+                margin-top: .2rem;
+                cursor: pointer;
+            }
+        }
+
+        .success {
+            background-color: rgba(68, 183, 100, 0.975);
+        }
+
         .login-form {
             width: 44%;
             max-width: 550px;
-            margin-left: 4rem;
+            min-width: 500px;
             z-index: 2;
             background-color: #FFFFFF;
             padding: 5rem 6rem 2rem;
@@ -77,6 +119,7 @@
             border-radius: 10px;
             position: relative;
             overflow: hidden;
+            margin-top: 2rem;
 
 
             .input-label {
@@ -109,17 +152,6 @@
                 color: #FFFFFF;
             }
 
-            .forgot {
-                text-align: center;
-                text-decoration: underline;
-                font: normal normal normal 17px/23px Avenir;
-                letter-spacing: 0px;
-                color: #646464;
-                padding-top: 1rem;
-                width: 90%;
-                cursor: pointer;
-            }
-
             .loginfloat {
                 position: absolute;
                 top: -12rem;
@@ -127,5 +159,29 @@
             }
 
         }
+    }
+
+    @media screen and (max-width: 500px) {
+        .dash--login .login-form .loginfloat {
+            display: none;
+        }
+
+        .dash--login .login-form {
+            width: 90%;
+            max-width: auto;
+            min-width: auto; 
+            background-color: #FFFFFF;
+            padding: 5rem 3rem 2rem;
+        }
+
+        .dash--login .login-form .input-label input {
+            width: 100%;
+        }
+
+        .dash--login .login-form button {
+            width: 100%;
+        }
+
+
     }
 </style>
