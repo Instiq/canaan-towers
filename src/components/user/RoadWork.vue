@@ -3,36 +3,18 @@
     <b-row class="text-left">
       <b-col class="left-text" md="6">
         <h2 class="header-main">
-          If you desire to build a modern residential apartment, that meets all
-          engineering standards, it is important that you engage us at Canaan
-          Towers.
+          {{ roadData.images[roadData.index].title }}
         </h2>
         <p>
-          Getting the plans right from the start is important and Canaan Towers
-          will play a vital role in ensuring designs and plans are accurately
-          implemented.
-        </p>
-        <p>How we fit into the construction process?</p>
-        <p class="ml-5">• We work together with your architect to achieve your vision.</p>
-        <p class="ml-5">
-          • We ensure that quality and not sub-standard materials are used
-          throughout the projects.
-        </p>
-        <p class="ml-5">
-          • We provide foundation designs to ensure compliance with building
-          regulations and standards.
+          {{ roadData.images[roadData.index].description }}
         </p>
       </b-col>
       <b-col class="right-image" md="6">
         <img
-          :src="getImgUrl(serviceData.mainPicture)"
+          :src="roadData.images[roadData.index].image"
           alt=""
           class="road-work-img"
         />
-        <!-- <b-button class="button">
-          <b-icon icon="plus" font-scale="1.5"></b-icon>
-          <span>add to my items</span>
-        </b-button> -->
       </b-col>
     </b-row>
   </b-container>
@@ -44,14 +26,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'serviceData'
+      'serviceData',
+      'roadData'
     ])
-  },
-  methods: {
-    getImgUrl (image) {
-      var images = require.context('../../assets/images/', false, /\.png$/)
-      return images('./' + image + '.png')
-    }
   }
 }
 </script>
@@ -59,7 +36,7 @@ export default {
 <style lang="scss" scoped>
 .left-text {
   background-image: url("../../assets/images/tech-1.png");
-  background-size: 120%;
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position-x: -2rem;
 }
@@ -89,21 +66,15 @@ export default {
 
 .road-work-img {
   width: 100%;
-  height: 100%;
-  // position: absolute;
-  // outline-offset: 1rem;
-  // transition: all .5s ease-out;
-
-  // &:hover {
-  //     outline: 1.2rem solid #E55B07;
-  //     transform: scale(1.05);
-  // }
+  height: 70%;
 }
 
 .header-main {
     font-size: 2rem;
     font-weight: 800;
     margin: 3.5rem 0 3.5rem 0;
+    text-transform: capitalize;
+
 }
 
 p {

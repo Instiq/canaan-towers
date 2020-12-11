@@ -4,7 +4,7 @@
         <app-carousel-main :mainCarousel="mainCarousel"></app-carousel-main>
         <app-about-service></app-about-service>
         <h3 class="building__header--text">Related Projects</h3>
-        <app-related-projects :relatedProjects="relatedProjects"></app-related-projects>
+        <app-related-projects :relatedProjects="relatedProjects" :url="url"></app-related-projects>
         <app-partners></app-partners>
         <app-whatsapp></app-whatsapp>
         <app-footer></app-footer>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -28,18 +29,33 @@ export default {
         leftText: 'A versatile engineering company with an ubiquitous experience accumulated from successful years of world class projects completion.',
         rightPicture: 'road-work-main-pic'
       },
-      mainCarousel: {
-        picture: [
-          'road-work-slide-1.png',
-          'road-work-slide-2.png'
-        ]
-      },
-      relatedProjects: {
-        picture: [
-          'road-work-1', 'road-work-2', 'road-work-3', 'road-work-4', 'road-work-5'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      url: '/road-work-single'
     }
+  },
+  async created () {
+    try {
+        this.$store.state.roadData.images = []
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/road/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/road/slider'),
+          // axios.get('https://canaan-towers-api.herokuapp.com/road/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        console.log('car', carResponse)
+        console.log('slide', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+          this.$store.state.roadData.images.push(slideResponse[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

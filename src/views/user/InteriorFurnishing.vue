@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -31,48 +32,36 @@ export default {
         leftText: 'At Canaan, we have a great team of professional designers that brings your imagination alive. You can also choose any interior design that appeals to you from this page.',
         rightPicture: 'interior-furnishing-main-pic'
       },
-      mainCarousel: {
-        picture: [
-          'interior-furnishing-main-carousel-1.jpg',
-          'interior-furnishing-main-carousel-2.jpg'
-        ]
-      },
-      relatedProjects: {
-        picture: [
-          'interior-furnishing-1', 'interior-furnishing-2', 'interior-furnishing-3', 'interior-furnishing-4', 'interior-furnishing-5'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'interior-furnishing-catalogue-1',
-          'interior-furnishing-catalogue-2',
-          'interior-furnishing-catalogue-3',
-          'interior-furnishing-catalogue-5',
-          'interior-furnishing-catalogue-5',
-          'interior-furnishing-catalogue-6',
-          'interior-furnishing-catalogue-7',
-          'interior-furnishing-catalogue-8',
-          'interior-furnishing-catalogue-9',
-          'interior-furnishing-catalogue-10',
-          'interior-furnishing-catalogue-11',
-          'interior-furnishing-catalogue-1'
-        ],
-        title: [
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition',
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition',
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
+  },
+  async created () {
+    try {
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

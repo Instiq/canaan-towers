@@ -37,7 +37,7 @@ export default {
 }
 
 .promise {
-  margin-top: 7rem;
+  margin-top: -9rem;
 
   &-icon {
     color: $main-orange;
@@ -73,5 +73,23 @@ export default {
 
         }
     }
+}
+
+@media screen and (max-width: 575px){
+  .header{
+    font-size: 1.7rem
+  }
+
+  .promise-icon-text {
+
+  &-main {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &-sub {
+    font-size: 1.1rem;
+  }
+}
 }
 </style>

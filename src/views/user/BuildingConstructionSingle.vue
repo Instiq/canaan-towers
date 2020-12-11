@@ -40,8 +40,8 @@ export default {
   },
   data () {
     return {
-      url: '/road-work-single',
-      title: 'road works',
+      url: '/building-construction-single',
+      title: 'building construction',
       data: {
         text: [
           'You can request for a quote for this service by clicking the button below',
@@ -62,7 +62,7 @@ export default {
   async created () {
     try {
         const [slideRequest] = await Promise.all([
-          axios.get('https://canaan-towers-api.herokuapp.com/road/slider')
+          axios.get('https://canaan-towers-api.herokuapp.com/building/slider')
         ])
         const slideResponse = slideRequest.data.data;
         console.log('slider', slideResponse)

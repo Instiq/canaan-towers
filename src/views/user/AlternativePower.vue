@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -31,48 +32,36 @@ export default {
         leftText: 'Our products guarantees un-interrupted power supply system in your home, office or organization.',
         rightPicture: 'alternative-power-main-pic'
       },
-      mainCarousel: {
-        picture: [
-          'alternative-power-main-carousel-1.jpg',
-          'alternative-power-main-carousel-2.png'
-        ]
-      },
-      relatedProjects: {
-        picture: [
-          'alternative-power-1', 'alternative-power-2', 'alternative-power-3', 'alternative-power-4', 'alternative-power-5'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1',
-          'alternative-power-catalogue-3',
-          'alternative-power-catalogue-2',
-          'alternative-power-catalogue-1'
-        ],
-        title: [
-          'White Balustrade',
-          'Front Italian Door',
-          'Front Italian Door',
-          'Stainless Steel Window',
-          'Hand Rail',
-          'Aluminium Partition',
-          'White Balustrade',
-          'Front Italian Door',
-          'Hand Rail',
-          'Aluminium Partition',
-          'White Balustrade',
-          'Front Italian Door'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
+  },
+  async created () {
+    try {
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/power/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/power/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/power/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slide', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,
