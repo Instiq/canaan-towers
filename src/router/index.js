@@ -4,6 +4,13 @@ import Admin from '../views/Admin'
 import Login from '../components/Adminz/Login'
 import Dashboard from '../components/Adminz/Dashboard/Dashhome'
 import Dashmain from '../components/Adminz/Dashboard/Dashmain'
+import CreateAdmin from '../components/Adminz/Dashboard/CreateAdmin'
+import Quotes from '../components/Adminz/Dashboard/Quotes'
+import Updateservices from '../components/Adminz/Dashboard/Updateservices'
+import Manageservices from '../components/Adminz/Dashboard/Manageservices'
+import AdminManagement from '../components/Adminz/Dashboard/AdminManagement'
+import Settings from '../components/Adminz/Dashboard/Settings'
+import Paystack from '../views/Paystack'
 
 Vue.use(VueRouter)
 
@@ -32,6 +39,31 @@ const routes = [
     path: '/road-work-single',
     name: 'RoadWorkSingle',
     component: () => import('../views/user/RoadWorkSingle.vue')
+  },
+  {
+    path: '/building-construction-single',
+    name: 'BuildingConstructionSingle',
+    component: () => import('../views/user/BuildingConstructionSingle.vue')
+  },
+  {
+    path: '/automobile-sales-single',
+    name: 'AutomobileSalesSingle',
+    component: () => import('../views/user/AutomobileSalesSingle.vue')
+  },
+  {
+    path: '/interior-furnishing-single',
+    name: 'InteriorFurnishingSingle',
+    component: () => import('../views/user/InteriorFurnishingSingle.vue')
+  },
+  {
+    path: '/alternative-power-single',
+    name: 'AlternativePowerSingle',
+    component: () => import('../views/user/AlternativePowerSingle.vue')
+  },
+  {
+    path: '/roofing-single',
+    name: 'RoofingSingle',
+    component: () => import('../views/user/RoofingSingle.vue')
   },
   {
     path: '/road-work',
@@ -69,46 +101,68 @@ const routes = [
     component: () => import('../views/user/Checkout.vue')
   },
   {
-    path: '/admin/login',
-    name: 'AdminLogin',
-    component: () => import('../views/admin/LandingPage.vue')
+    path: '/paystack',
+    name: 'Paystack',
+    component: Paystack
   },
-  {
-    path: '/admin/super-dashboard',
-    name: 'AdminDashboard',
-    component: () => import('../views/admin/SuperDashboard.vue')
-  },
-  {
-    path: '/admin/manage-services',
-    name: 'ManageServices',
-    component: () => import('../views/admin/ManageServices.vue')
-  },
-  {
-    path: '/admin/manage-services-carousel',
-    name: 'ManageServicesCarousel',
-    component: () => import('../views/admin/ManageServicesCarousel.vue')
-  },
-  ,
   {
     path: '/admin',
-    name: 'Admin',
+    name: '',
     component: Admin,
     children: [
       {
         path: '',
-        name: 'Login',
-        component: Login,
+        name: '',
+        component: Login
       },
       {
         path: 'dashboard',
-        name: 'Dashboard',
+        name: '',
         component: Dashboard,
+
+        beforeEnter: (to, from, next) => {
+          // ...
+          const admin = JSON.parse(localStorage.getItem('admin'))
+          const timeOut = localStorage.getItem('timeOut')
+          if ((admin && admin.token) && timeOut) next()
+          else next('/admin')
+        },
         children: [
           {
             path: '',
-            name: 'Dashmain',
-            component: Dashmain,
-          }
+            name: '',
+            component: Dashmain
+          },
+          {
+            path: 'createadmin',
+            name: 'CreateAdmin',
+            component: CreateAdmin
+          },
+          {
+            path: 'quotes',
+            name: 'Quotes',
+            component: Quotes
+          },
+          {
+            path: 'updateservice',
+            name: 'Updateservices',
+            component: Updateservices
+          },
+          {
+            path: 'manageservice',
+            name: 'Manageservices',
+            component: Manageservices
+          },
+          {
+            path: 'adminmanage',
+            name: 'adminmanage',
+            component: AdminManagement
+          },
+          {
+            path: 'settings',
+            name: 'settings',
+            component: Settings
+          },
         ]
 
       }

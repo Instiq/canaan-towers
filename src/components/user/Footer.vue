@@ -9,14 +9,16 @@
           <b-row>
             <b-col xs="6" md="4">
               <p>Canaan Towers Limited</p>
-              <p>1st Floor, Osborne House</p>
-              <p>2a, Osborne Drive</p>
-              <p>Victoria Island, Lagos.</p>
+              <p>122, Iworoko road, Ado Ekiti</p>
             </b-col>
             <b-col xs="6" md="4">
               <p>
-                234-803-121-0101
+                08035788111
               </p>
+              <p>
+                08082862610
+              </p>
+                07036322465
               <p>info@canaantowers.com</p>
               <p>Privacy Policy</p>
             </b-col>

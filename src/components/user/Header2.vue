@@ -6,18 +6,17 @@
       <img
         src="../../assets/images/Logo-1.png"
         alt=""
-        class="navbar-first__logo navbar-first__logo--1"
+        class="navbar-first__logo"
       />
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto navbar--1 flex">
+        <b-navbar-nav class="ml-auto">
           <b-nav-item href="#" class="navbar-first__item" to="/">Home</b-nav-item>
           <b-nav-item href="#" class="navbar-first__item" to="/about">About Us</b-nav-item>
           <b-nav-item href="#" class="navbar-first__item" to="/contact">Contact Us</b-nav-item>
           <b-nav-item href="#" class="navbar-first__item">
-            <b-button class="navbar-first__item--button text-left d-flex justify-content-between" to="/checkout">
-              <b-icon icon="cart-dash-fill"></b-icon>
-              <span class="" style="get-quote">Get Quote</span>
+            <b-button class="navbar-first__item--button text-center" to="/checkout" @click.native="checkoutMain">
+              <span class="" style="get-quote">Get a Quote</span>
             </b-button>
           </b-nav-item>
         </b-navbar-nav>
@@ -36,13 +35,11 @@
           <li class="navigation__item"><router-link to="/about" class="navigation__link">About</router-link></li>
           <li class="navigation__item"><router-link to="/contact" class="navigation__link">Contact Us</router-link></li>
           <li class="navigation__item">
-            <a href="#" class="navigation__link">
               <!-- <b-button class="navbar-first__item--button text-left d-flex justify-content-between" to="/checkout">
                 <b-icon icon="cart-dash-fill"></b-icon>
                 <span class="" style="get-quote">Get Quote</span>
               </b-button> -->
-              <router-link to="/quote" class="navigation__link">get quote</router-link>
-            </a>
+              <router-link to="/checkout" class="navigation__link" @click.native="checkoutMain">get quote</router-link>
           </li>
         </ul>
       </nav>
@@ -74,6 +71,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import Card from '@/components/user/Cards.vue'
 import Text from '@/components/user/Texts.vue'
 
@@ -87,7 +86,8 @@ export default {
     getImgUrl (image) {
       var images = require.context('../../assets/images/', false, /\.png$/)
       return images('./' + image + '.png')
-    }
+    },
+    ...mapMutations(['checkoutMain'])
   },
   mounted () {
     // eslint-disable-next-line no-undef
@@ -133,17 +133,132 @@ export default {
 }
 
 .navigation {
+  display: none;
+}
+
+.header-first {
+  background-image: url("../../assets/images/CanaanArc.png");
+  min-height: 90rem;
+  // background-blend-mode: hue;
+  position: relative;
+  top: 0;
+  background-size: 70vw;
+  background-repeat: no-repeat;
+  background-position: absolute;
+  background-position-x: right;
+}
+
+.navbar-first {
+  padding: 5rem 10rem;
+}
+
+.header-first--secondary-text {
+  font-size: 1.4rem;
+}
+
+.navbar-first__logo {
+  width: 13%;
+  position: absolute;
+  left: 7rem;
+  top: 3rem;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-first__logo {
+    width: 14%;
+    left: 3rem;
+    top: 2rem;
+  }
+}
+
+.navbar-first__item {
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 0 2rem;
+}
+
+.navbar-first__item a {
+  color: #ffffff !important;
+}
+
+.navbar-first__item--button {
+  color: #000;
+  width: 12rem;
+  padding: 1.1rem;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+  background-color: transparent;
+  font-weight: 600;
+  border: 1px solid $main-orange;
+  background-color: $main-orange;
+  margin-top: -10px;
+  transform: all 0.3s ease;
+}
+
+.navbar-first__item--button:hover {
+  transform: scale(1.1);
+  background-color: $main-orange;
+  border: 1px solid $main-orange;
+}
+
+.header-first__content {
+  position: relative;
+  top: 2rem;
+
+  @include respond(tab-land) {
+    top: 0rem;
+  }
+}
+
+.header-first__content--right img {
+  width: 100%;
+  position: absolute;
+  top: 7rem;
+  right: 0;
+}
+
+.header-first__content--left {
+  color: #fff;
+  text-align: left;
+  padding-top: 20rem;
+}
+
+.header-first--primary-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 1200px) {
+  .header-first {
+    min-height: 70rem;
+    background-size: 80vw;
+  }
+}
+
+@media screen and (max-width: 991px) {
+    .header-first__content {
+  position: relative;
+  top: 15rem;
+}
+
+.navbar-first {
+  display: none
+}
+
+.navigation {
+    display: block;
     &__checkbox {
         display: none;
     }
 
     &__button {
-        background-color: rgb(255, 255, 255);
+        background-color: #fff;
         height: 7rem;
         width: 7rem;
         position: fixed;
         top: 6rem;
-        right: 10rem;
+        right: 6rem;
         border-radius: 50%;
         z-index: 2000;
         box-shadow: 0 1rem 3rem rgba(#000, .1);
@@ -169,9 +284,9 @@ export default {
         border-radius: 50%;
         position: fixed;
         top: 6.5rem;
-        right: 10rem;
+        right: 6.5rem;
         // background-color: radial-gradient(orange, $main-orange);
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(#000, .85);
         z-index: 1000;
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
@@ -192,7 +307,7 @@ export default {
         height: 100vh;
         position: fixed;
         top: 0;
-        left: 0;
+        left: -20rem;
         z-index: 1500;
 
         opacity: 0;
@@ -250,6 +365,7 @@ export default {
     &__checkbox:checked ~ &__nav {
         opacity: 1;
         width: 100%;
+        left: 0;
     }
 
     //ICON
@@ -303,122 +419,8 @@ export default {
         top: 0;
         transform: rotate(-135deg);
     }
-}
-
-
-.header-first {
-  background-image: url("../../assets/images/CanaanArc.png");
-  min-height: 90rem;
-  // background-blend-mode: hue;
-  position: relative;
-  top: 0;
-  background-size: 70vw;
-  background-repeat: no-repeat;
-  background-position: absolute;
-  background-position-x: right;
-}
-
-.wrapper {
-  position: relative;
-}
-
-.navbar-first {
-  padding: 4rem 10rem 0;
-  right: 0;
-  position: absolute;
-
-  .navbar--1 {
-    width: 40vw;
-    justify-content: space-between;
-    white-space: nowrap;
   }
-}
 
-.header-first--secondary-text {
-  font-size: 1.4rem;
-}
-
-.navbar-first__logo {
-  width: 13%;
-  position: absolute;
-  left: 7rem;
-  top: 3rem;
-
-  &--1 {
-    display: none
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .navbar-first__logo {
-    width: 14%;
-    left: 3rem;
-    top: 2rem;
-  }
-}
-
-.navbar-first__item {
-  font-size: 1.3rem;
-  font-weight: 700;
-  padding: 0 2rem;
-}
-
-.navbar-first__item a {
-  color: #ffffff !important;
-}
-
-.navbar-first__item--button {
-  color: #000;
-  width: 12rem;
-  padding: 1.1rem;
-  font-size: 1.3rem;
-  border-radius: 0.4rem;
-  background-color: transparent;
-  font-weight: 600;
-  border: 1px solid $main-orange;
-  background-color: $main-orange;
-  margin-top: -10px;
-  transform: all 0.3s ease;
-}
-
-.navbar-first__item--button:hover {
-  transform: scale(1.1);
-  background-color: $main-orange;
-  border: 1px solid $main-orange;
-}
-
-.header-first__content {
-  position: relative;
-  top: 15rem
-}
-
-.header-first__content--right img {
-  width: 100%;
-  position: absolute;
-  top: 7rem;
-  right: 0;
-}
-
-.header-first__content--left {
-  color: #fff;
-  text-align: left;
-  padding-top: 15rem;
-}
-
-.header-first--primary-text {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-@media screen and (max-width: 1200px) {
-  .header-first {
-    min-height: 70rem;
-    background-size: 80vw;
-  }
-}
-
-@media screen and (max-width: 991px) {
     .header-first__content--left {
         display: none
     }
@@ -442,20 +444,7 @@ export default {
   }
 }
 
-
-@media screen and (min-width: 900px) {
-    .navigation {
-      display: none;
-    }
-}
-
-
 @media screen and (max-width: 767px) {
-
-  .navigation {
-      display: inline;
-    }
-
   .header-first {
     min-height: 40rem;
     background-size: 82vw;

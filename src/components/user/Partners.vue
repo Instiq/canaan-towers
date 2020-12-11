@@ -28,8 +28,21 @@ export default {
   },
   methods: {
     getImgUrl (image) {
-      var images = require.context('../../assets/images/', false, /\.png$/)
-      return images('./' + image + '.png')
+      let img = image.split('.')
+      img = img[img.length - 1]
+      if (img === 'jpg') {
+        const images = require.context('../../assets/images/', false, /\.jpg$/)
+        return images('./' + image)
+      } else if (img === 'png') {
+        const images = require.context('../../assets/images/', false, /\.png$/)
+        return images('./' + image)
+      } else if (img === 'svg') {
+        const images = require.context('../../assets/images/', false, /\.svg$/)
+        return images('./' + image)
+      } else if (img === 'jpeg') {
+        const images = require.context('../../assets/images/', false, /\.jpeg$/)
+        return images('./' + image)
+      }
     }
   },
   mounted () {

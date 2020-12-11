@@ -2,32 +2,34 @@
 <template>
   <b-container fluid class="related-projects">
     <section class="customer-logos slider">
-      <div v-for="(image, index) in relatedProjects.picture" :key="index">
+      <div v-for="(val, index) in relatedProjects" :key="index">
         <div class="slide">
-          <p class="text">Austin Opara Estate</p>
-          <router-link to="/road-work-single">
+          <!-- <p class="text">{{ val.title }}</p> -->
+          <router-link :to="url">
             <img
-              :src="getImgUrl(image)"
+              :src="val.image"
             />
           </router-link>
-          <b-button class="button" to="/road-work-single">View</b-button>
+            <!-- {{ index }} -->
+          <b-button class="button" :to="url" @click="getIndex(index)">View</b-button>
         </div>
+        <!-- {{ index }} -->
       </div>
     </section>
+    <!-- {{ index }} -->
   </b-container>
 </template>
 
 <script>
 
 export default {
-  props: ['relatedProjects'],
+  props: ['relatedProjects', 'url'],
   methods: {
-    getImgUrl (image) {
-      var images = require.context('../../assets/images/', false, /\.png$/)
-      return images('./' + image + '.png')
+    getIndex(index) {
+      this.$store.state.roadData.index = index
     }
   },
-  mounted () {
+  updated () {
     // eslint-disable-next-line no-undef
     $(document).ready(function () {
       // eslint-disable-next-line no-undef
@@ -35,7 +37,7 @@ export default {
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 1500,
+        autoplaySpeed: 1500, 
         arrows: false,
         dots: false,
         pauseOnHover: true,

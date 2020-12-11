@@ -1,6 +1,7 @@
 <template>
     <div to="" class="whatsapp">
-      <a href="https://api.whatsapp.com/send?phone=23409057341574" class="">
+      <a href="https://api.whatsapp.com/send?phone=23408035788111" class=""
+      target="_blank">
         <img src="../../assets/images/whatsapp.svg" alt="" />
       </a>
     </div>

@@ -3,7 +3,7 @@
     <b-card class="text-left card">
       <h3 class="header">Send Us  A Message</h3>
       <b-row>
-        <b-col cols="12" md="6"> 
+        <b-col cols="12" md="6">
           <p class="mb-5 fill-info">
             Kindly fill in your details in the form below. Our agents will
             contact you
@@ -11,12 +11,12 @@
           <b-form @submit.prevent="handleSubmit" v-if="show">
 
             <b-form-group
-                id="input-group-2"
+                id="input-group-1"
                 label="Name:"
-                label-for="input-2"
+                label-for="input-1"
             >
               <b-form-input
-                id="input-2"
+                id="input-1"
                 v-model="form.name"
                 required
                 placeholder=""
@@ -24,14 +24,14 @@
               ></b-form-input>
             </b-form-group>
 
-             <b-form-group
-              id="input-group-1"
+            <b-form-group
+              id="input-group-2"
               label="Email:"
-              label-for="input-1"
+              label-for="input-2"
               description=""
             >
               <b-form-input
-                id="input-1"
+                id="input-2"
                 v-model="form.email"
                 type="email"
                 required
@@ -41,13 +41,13 @@
             </b-form-group>
 
             <b-form-group
-              id="input-group-1"
+              id="input-group-3"
               label="Phone number:"
-              label-for="input-1"
+              label-for="input-3"
               description=""
             >
               <b-form-input
-                id="input-1"
+                id="input-3"
                 v-model="form.number"
                 type="number"
                 required

@@ -3,34 +3,25 @@
     <b-carousel
       class="carousel-main"
       id="carousel-1"
-      v-model="slide"
       :interval="4000"
       controls
       indicators
-      @sliding-start="onSlideStart"
-      @sliding-end="onSlideEnd"
     >
       <!-- Slides with custom text -->
-      <b-carousel-slide :img-src="getImgUrl(val)" v-for="(val, index) in mainCarousel.picture" :key=index
+      <b-carousel-slide :img-src="val.carousel" v-for="(val, index) in mainCarousel" :key=index
         class="image">
       </b-carousel-slide>
-      <figcaption class="carousel-text text-right">
+      <!-- <figcaption class="carousel-text text-right">
         <h3>project type</h3>
         <p>residential apartment</p>
-      </figcaption>
+      </figcaption> -->
     </b-carousel>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['mainCarousel'],
-  methods: {
-    getImgUrl (image) {
-      var images = require.context('../../assets/images/', false, /\.png$/)
-      return images('./' + image + '.png')
-    }
-  }
+  props: ['mainCarousel']
 }
 </script>
 

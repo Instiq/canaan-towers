@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '@/components/user/Header.vue'
 import Footer from '@/components/user/Footer.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
@@ -31,48 +32,36 @@ export default {
         leftText: 'We have the perfect automobile just for you at Canaan towers.',
         rightPicture: 'automobile-sales-main-pic'
       },
-      mainCarousel: {
-        picture: [
-          'automobile-sales-main-carousel-1',
-          'automobile-sales-main-carousel-2'
-        ]
-      },
-      relatedProjects: {
-        picture: [
-          'automobile-sales-1', 'automobile-sales-2', 'automobile-sales-3', 'automobile-sales-4', 'automobile-sales-5'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4',
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4',
-          'automobile-sales-catalogue-1',
-          'automobile-sales-catalogue-2',
-          'automobile-sales-catalogue-3',
-          'automobile-sales-catalogue-4'
-        ],
-        title: [
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW',
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW',
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
+  },
+  async created () {
+    try {
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+        }
+      } catch (err) {
+      console.log(err);
+    }  
   },
   components: {
     appHeader: Header,

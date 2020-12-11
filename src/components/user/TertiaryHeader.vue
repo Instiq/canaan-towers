@@ -3,8 +3,8 @@
         <span>
             Service |
         </span>
-        <span class="orange-text">
-            {{ serviceData.service }} …
+        <span class="orange-text title-name">
+            {{ title }} …
         </span><br><br>
         <router-link :to="{ path: $store.state.route.from.fullPath }">
             <b-icon
@@ -20,6 +20,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  props: ['title'],
   computed: {
     ...mapGetters([
       'serviceData'
@@ -45,5 +46,9 @@ export default {
         .orange-text {
             color: $main-blue;
         }
+    }
+
+    .title-name {
+        text-transform: capitalize;
     }
 </style>

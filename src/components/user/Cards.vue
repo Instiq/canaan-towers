@@ -2,17 +2,17 @@
   <div>
     <b-row>
       <b-col v-for="(val, index) in image" :key="index" cols="6" md="4">
-      <router-link :to="link[index]">
-        <b-card :img-src="getImgUrl(val)" img-alt="Card image" img-top>
-          <b-card-text class="text">
-            <h4 class="text-left main">{{ header[index] }}</h4>
-              <p class="text-left para">
-                {{ para[index] }}
-              </p>
-            </b-card-text>
-          </b-card>
-      </router-link>
-    </b-col>
+        <router-link :to="link[index]">
+          <b-card :img-src="getImgUrl(val)" img-alt="Card image" img-top>
+            <b-card-text class="text">
+              <h4 class="text-left main">{{ header[index] }}</h4>
+                <p class="text-left para">
+                  {{ para[index] }}
+                </p>
+              </b-card-text>
+            </b-card>
+        </router-link>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -28,7 +28,6 @@ export default {
         '/roofing',
         '/automobile-sales',
         '/alternative-power'
-
       ],
       header: [
         'Building Construction',

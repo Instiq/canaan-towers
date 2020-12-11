@@ -8,17 +8,16 @@
 <script>
 import Header from '@/components/user/Header2.vue'
 import Whatsapp from '@/components/user/Whatsapp.vue'
-import Api from '@/Auth/Api.js'
 
-
-const { getBuilding } = Api();
+// import Api from '@/store/Auth/Api'
+import { mapState } from 'vuex'
 
 export default {
   data () {
     return {
       headerMain: {
-        leftHeader: 'The Best Place For All You Need...',
-        leftText: 'Simplifying the complexities of human desires is our specialty. We are for you.'
+        leftHeader: 'The Promise Land of Exceptional Services',
+        leftText: ''
       }
     }
   },
@@ -26,15 +25,19 @@ export default {
     appHeader: Header,
     appWhatsapp: Whatsapp
   },
+  beforeCreate () {
+    this.$store.dispatch('makeRequest')
+  },
   mounted () {
-    getBuilding("building","slider")
+  },
+  computed: {
+    ...mapState([
+      'items'
+    ])
+    // Add other computed properties here
   },
   methods: {
-    async getName(){
-      const res = await fetch('https://canaan-towers-api.herokuapp.com/building/slider');
-      const data = await res.json();
-      console.log(data)
-    }
+
   }
 }
 </script>

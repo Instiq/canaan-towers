@@ -1,30 +1,60 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
-// @import './header.scss';
-
-// * {
-//     margin: 0;
-//     padding: 0;
-//     box-sizing: inherit;
-// }
 
 html {
     font-size: 62.5%;
 }
 
 body {
-    // padding: 1rem;
     font-family: "Lato", sans-serif;
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 1.7;
-    // color: $color-light-grey;
     box-sizing: border-box;
     background-color: #F2EFEF;
     overflow-x: hidden;
-    // position: relative;
+}
+
+.spinnerz {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:rgba(112, 112, 112, 0.2);
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    z-index: 1000;
 }
 
 .main-content {
     padding: 8rem 4rem;
+}
+
+.flex--1 {
+    display: flex; 
+}
+
+.flex--2 {
+    display: flex;
+    align-items: center;
+}
+
+.flex--3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid--1 {
+    display: grid;
+    place-items: center;
+}
+
+button, button:focus {
+  outline: none;
+  border: none;
+}
+
+
+*:focus {
+    outline: 0;
 }
