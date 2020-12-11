@@ -32,53 +32,32 @@ export default {
         leftText: 'We have the perfect automobile just for you at Canaan towers.',
         rightPicture: 'automobile-sales-main-pic'
       },
-      mainCarousel: {
-        picture: [ ]
-      },
-      relatedProjects: {
-        picture: [
-          'automobile-sales-1.png', 'automobile-sales-2.png', 'automobile-sales-3.jpg', 'automobile-sales-4.png', 'automobile-sales-5.png'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'automobile-sales-catalogue-1.png',
-          'automobile-sales-catalogue-2.png',
-          'automobile-sales-catalogue-3.png',
-          'automobile-sales-catalogue-4.png',
-          'automobile-sales-catalogue-1.png',
-          'automobile-sales-catalogue-2.png',
-          'automobile-sales-catalogue-3.png',
-          'automobile-sales-catalogue-4.png',
-          'automobile-sales-catalogue-1.png',
-          'automobile-sales-catalogue-2.png',
-          'automobile-sales-catalogue-3.png',
-          'automobile-sales-catalogue-4.png'
-        ],
-        title: [
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW',
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW',
-          'Mercedez Benz E420',
-          'Range Rover Sport',
-          'Mc Laren W12',
-          'BMW'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
   },
-    async created () {
+  async created () {
     try {
-        const request = await axios.get('https://canaan-towers-api.herokuapp.com/automobile/carousel');
-        const response = request.data;
-        console.log('building', response)
-        for (let i = 0; i < response.length; i++) {
-          this.mainCarousel.picture.push(response[i])
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/automobile/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
         }
       } catch (err) {
       console.log(err);

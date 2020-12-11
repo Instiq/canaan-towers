@@ -1,21 +1,21 @@
 <template>
   <b-container class="catalogue mb-5" >
     <b-row>
-      <b-col v-for="(image, index) in catalogueData.images" :key="index" xl="3" lg="4" md="6" sm='6' cols="12">
+      <b-col v-for="(val, index) in catalogueData" :key="index" xl="3" lg="4" md="6" sm='6' cols="12">
         <b-card
-          :img-src="getImgUrl(image)"
+          :img-src="val.image"
           img-alt="Image"
           img-top
           class="mt-5"
         >
           <b-card-text>
             <div class="d-flex justify-content-between">
-                <p>{{ catalogueData.title[index] }}</p>
+                <p>{{ val.description }}</p>
                 <router-link to="/checkout">
                     <b-button class="quote-btn"><span>Get Quote</span></b-button>
                 </router-link>
             </div>
-            <p class="text-left">N250,000</p>
+            <p class="text-left">{{ val.price }}</p>
           </b-card-text>
         </b-card>
       </b-col>
@@ -25,26 +25,7 @@
 
 <script>
 export default {
-  props: ['catalogueData'],
-  methods: {
-    getImgUrl (image) {
-      let img = image.split('.')
-      img = img[img.length - 1]
-      if (img === 'jpg') {
-        const images = require.context('../../assets/images/', false, /\.jpg$/)
-        return images('./' + image)
-      } else if (img === 'png') {
-        const images = require.context('../../assets/images/', false, /\.png$/)
-        return images('./' + image)
-      } else if (img === 'svg') {
-        const images = require.context('../../assets/images/', false, /\.svg$/)
-        return images('./' + image)
-      } else if (img === 'jpeg') {
-        const images = require.context('../../assets/images/', false, /\.jpeg$/)
-        return images('./' + image)
-      }
-    }
-  }
+  props: ['catalogueData']
 }
 </script>
 

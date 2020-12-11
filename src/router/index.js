@@ -39,6 +39,31 @@ const routes = [
     component: () => import('../views/user/RoadWorkSingle.vue')
   },
   {
+    path: '/building-construction-single',
+    name: 'BuildingConstructionSingle',
+    component: () => import('../views/user/BuildingConstructionSingle.vue')
+  },
+  {
+    path: '/automobile-sales-single',
+    name: 'AutomobileSalesSingle',
+    component: () => import('../views/user/AutomobileSalesSingle.vue')
+  },
+  {
+    path: '/interior-furnishing-single',
+    name: 'InteriorFurnishingSingle',
+    component: () => import('../views/user/InteriorFurnishingSingle.vue')
+  },
+  {
+    path: '/alternative-power-single',
+    name: 'AlternativePowerSingle',
+    component: () => import('../views/user/AlternativePowerSingle.vue')
+  },
+  {
+    path: '/roofing-single',
+    name: 'RoofingSingle',
+    component: () => import('../views/user/RoofingSingle.vue')
+  },
+  {
     path: '/road-work',
     name: 'RoadWork',
     component: () => import('../views/user/RoadWork.vue')

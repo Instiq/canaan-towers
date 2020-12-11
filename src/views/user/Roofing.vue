@@ -32,61 +32,33 @@ export default {
         leftText: 'We are a company that supply excellent quality and durable stone coated roofing sheet.',
         rightPicture: 'roofing-main-pic'
       },
-      mainCarousel: {
-        picture: [],
-        header: [
-          'product-type',
-          'product-type'
-        ],
-        text: [
-          'brown stone coated roofing (3MM)',
-          'stone coated roofing sheet'
-        ]
-      },
-      relatedProjects: {
-        picture: [
-          'roofing-1.png', 'roofing-2.png', 'roofing-3.png', 'roofing-4.png', 'roofing-5.png'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'roofing-1.png',
-          'roofing-2.png',
-          'roofing-3.png',
-          'roofing-4.png',
-          'roofing-3.png',
-          'roofing-4.png',
-          'roofing-2.png',
-          'roofing-1.png',
-          'roofing-2.png',
-          'roofing-3.png',
-          'roofing-1.png',
-          'roofing-4.png'
-        ],
-        title: [
-          'Aluminium Roofing Sheet',
-          'Stone Coated Tiles',
-          'Stone Coated Tiles',
-          'Dark Stone Coated Tiles',
-          'Aluminium Roofing Sheet',
-          'Stone Coated Tiles',
-          'Stone Coated Tiles',
-          'Dark Stone Coated Tiles',
-          'Aluminium Roofing Sheet',
-          'Stone Coated Tiles',
-          'Stone Coated Tiles',
-          'Dark Stone Coated Tiles'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
   },
-    async created () {
+  async created () {
     try {
-        const request = await axios.get('https://canaan-towers-api.herokuapp.com/roof/carousel');
-        const response = request.data;
-        console.log('building', response)
-        for (let i = 0; i < response.length; i++) {
-          this.mainCarousel.picture.push(response[i])
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/roof/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/roof/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/roof/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+          // this.$store.state.roofData.images.push(slideResponse[i])
         }
       } catch (err) {
       console.log(err);

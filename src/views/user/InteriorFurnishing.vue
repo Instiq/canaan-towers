@@ -32,53 +32,32 @@ export default {
         leftText: 'At Canaan, we have a great team of professional designers that brings your imagination alive. You can also choose any interior design that appeals to you from this page.',
         rightPicture: 'interior-furnishing-main-pic'
       },
-      mainCarousel: {
-        picture: []
-      },
-      relatedProjects: {
-        picture: [
-          'interior-furnishing-1.png', 'interior-furnishing-2.png', 'interior-furnishing-3.png', 'interior-furnishing-4.png', 'interior-furnishing-5.png'
-        ]
-      },
-      catalogueData: {
-        images: [
-          'interior-furnishing-catalogue-1.png',
-          'interior-furnishing-catalogue-2.png',
-          'interior-furnishing-catalogue-3.png',
-          'interior-furnishing-catalogue-5.png',
-          'interior-furnishing-catalogue-5.png',
-          'interior-furnishing-catalogue-6.png',
-          'interior-furnishing-catalogue-7.png',
-          'interior-furnishing-catalogue-8.png',
-          'interior-furnishing-catalogue-9.png',
-          'interior-furnishing-catalogue-10.png',
-          'interior-furnishing-catalogue-11.png',
-          'interior-furnishing-catalogue-1.png'
-        ],
-        title: [
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition',
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition',
-          'Inverter 2.5KVA',
-          'Solar Panel',
-          'Solar Battery',
-          'Aluminium Partition'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      catalogueData: []
     }
   },
-    async created () {
+  async created () {
     try {
-        const request = await axios.get('https://canaan-towers-api.herokuapp.com/furnish/carousel');
-        const response = request.data;
-        console.log('building', response)
-        for (let i = 0; i < response.length; i++) {
-          this.mainCarousel.picture.push(response[i])
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/slider'),
+          axios.get('https://canaan-towers-api.herokuapp.com/furnish/catalogue')
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        const catResponse = catRequest.data.data;
+        console.log('car', carResponse)
+        console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < catResponse.length; i++) {
+          this.catalogueData.push(catResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
         }
       } catch (err) {
       console.log(err);

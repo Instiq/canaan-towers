@@ -4,7 +4,7 @@
         <app-carousel-main :mainCarousel="mainCarousel"></app-carousel-main>
         <app-about-service></app-about-service>
         <h3 class="building__header--text">Related Projects</h3>
-        <app-related-projects :relatedProjects="relatedProjects"></app-related-projects>
+        <app-related-projects :relatedProjects="relatedProjects" :url="url"></app-related-projects>
         <app-partners></app-partners>
         <app-whatsapp></app-whatsapp>
         <app-footer></app-footer>
@@ -29,27 +29,29 @@ export default {
         leftText: 'A versatile engineering company with an ubiquitous experience accumulated from successful years of world class projects completion.',
         rightPicture: 'interior-furnishing-main-pic'
       },
-      mainCarousel: {
-        picture: []
-      },
-      relatedProjects: {
-        picture: [
-          'building-construction-1.png',
-          'building-construction-2.png',
-          'building-construction-3.png',
-          'building-construction-4.png',
-          'building-construction-5.png'
-        ]
-      }
+      mainCarousel: [],
+      relatedProjects: [],
+      url: '/building-construction-single'
     }
   },
   async created () {
     try {
-        const request = await axios.get('https://canaan-towers-api.herokuapp.com/building/carousel');
-        const response = request.data;
-        console.log('building', response)
-        for (let i = 0; i < response.length; i++) {
-          this.mainCarousel.picture.push(response[i])
+        const [carRequest, slideRequest, catRequest] = await Promise.all([
+          axios.get('https://canaan-towers-api.herokuapp.com/building/carousel'),
+          axios.get('https://canaan-towers-api.herokuapp.com/building/slider'),
+        ])
+        const carResponse = carRequest.data.data;
+        const slideResponse = slideRequest.data.data;
+        // const catResponse = catRequest.data;
+        console.log('car', carResponse)
+        // console.log('cat', catResponse)
+        console.log('slider', slideResponse)
+        for (let i = 0; i < carResponse.length; i++) {
+          this.mainCarousel.push(carResponse[i])
+        }
+        for (let i = 0; i < slideResponse.length; i++) {
+          this.relatedProjects.push(slideResponse[i])
+          this.$store.state.buildingData.images.push(slideResponse[i])
         }
       } catch (err) {
       console.log(err);

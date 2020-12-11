@@ -8,39 +8,20 @@
       indicators
     >
       <!-- Slides with custom text -->
-      <b-carousel-slide :img-src="val.carousel" v-for="(val, index) in mainCarousel.picture" :key=index
+      <b-carousel-slide :img-src="val.carousel" v-for="(val, index) in mainCarousel" :key=index
         class="image">
       </b-carousel-slide>
-      <figcaption class="carousel-text text-right">
+      <!-- <figcaption class="carousel-text text-right">
         <h3>project type</h3>
         <p>residential apartment</p>
-      </figcaption>
+      </figcaption> -->
     </b-carousel>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['mainCarousel'],
-  methods: {
-    getImgUrl (image) {
-      let img = image.split('.')
-      img = img[img.length - 1]
-      if (img === 'jpg') {
-        const images = require.context('../../assets/images/', false, /\.jpg$/)
-        return images('./' + image)
-      } else if (img === 'png') {
-        const images = require.context('../../assets/images/', false, /\.png$/)
-        return images('./' + image)
-      } else if (img === 'svg') {
-        const images = require.context('../../assets/images/', false, /\.svg$/)
-        return images('./' + image)
-      } else if (img === 'jpeg') {
-        const images = require.context('../../assets/images/', false, /\.jpeg$/)
-        return images('./' + image)
-      }
-    }
-  }
+  props: ['mainCarousel']
 }
 </script>
 
