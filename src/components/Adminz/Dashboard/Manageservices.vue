@@ -5,7 +5,7 @@
             <div class="flex--2 choose">
                 <div class="flex--2">
                     <label for="cars" class="category-label"  @click="fetchService()">Choose a Service : </label>
-                     <div class='dropdown'>
+                    <div class='dropdown'>
                         <h5 @click="toggler()" >{{services}}</h5>
                         <ul class="payLinks" :class="{ 'showdropdown':  toggle  }" @click="toggle = !toggle">
                             <li @click="service = 'building'; services = 'Building Construction'; fetchService()">Building Construction</li>
@@ -157,8 +157,8 @@
             try {
                 const request = await fetch('https://canaan-towers-api.herokuapp.com/building/carousel');
                 const response = await request.json();
-                console.log('building', response)
-                this.carousels = response;
+                console.log('buildings', response.data)
+                this.carousels = response.data;
             } catch (err) {
                 console.log(err);
             }  
@@ -262,8 +262,8 @@
                     try {
                     const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
                     const response = await request.json();
-                    console.log('local trial', response.carousel)
-                    this.carousels = response;
+                    console.log('local trial', response)
+                    this.carousels = response.data;
                     } catch (err) {
                         console.log(err);
                     }  
@@ -272,8 +272,8 @@
                     try {
                     const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
                     const response = await request.json();
-                    console.log('building', response)
-                    this.catalogues = response;
+                    console.log('buildingasasas', response)
+                    this.catalogues = response.data;
                     } catch (err) {
                         console.log(err);
                     }  
@@ -282,8 +282,8 @@
                     try {
                     const request = await fetch(`https://canaan-towers-api.herokuapp.com/${this.service}/${this.serviceCategory}`);
                     const response = await request.json();
-                    console.log('building', response)
-                    this.projects = response;
+                    console.log('building', response.data)
+                    this.projects = response.data;
                     console.log('projectssssss', this.projects)
                     } catch (err) {
                         console.log(err);
