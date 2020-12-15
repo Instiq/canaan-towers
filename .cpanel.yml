@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/canaanto/repositories/
-    - /bin/cp -r * $DEPLOYPATH
+    - /bin/cp -r  /home/canaanto/repositories/canaan-towers-frontend/* $DEPLOYPATH
