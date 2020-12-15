@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/canaanto/repositories/
+    - /bin/cp index.html $DEPLOYPATH
